@@ -1,0 +1,212 @@
+﻿@model Mshop.Models.CustomerInfo
+@{
+    ViewBag.Title = "UpdateCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .callout {
+        background-color: whitesmoke;
+    }
+</style>
+<section class="content" style="min-height:500px;overflow-x:hidden;">
+    <div class="row">
+        <div class="col-md-12 ">
+            <!--breadcrumbs start -->
+            <ul class="breadcrumb ">
+
+
+                <li class="active">Update Customer Detail</li>
+            </ul>
+            <!--breadcrumbs end -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading" style="background-color:white; color: #343e6e; font-size: 16px; border: 3px solid #f1f2f7; border-top-color: #1b4a6e; border-radius: 5px 5px; ">
+                    <strong>Update Customer Detail</strong>
+                </header>
+                <div class="panel-body" style="margin-top:10px;">
+
+                    <div class="row">
+                        <div class="col-md-7">
+
+                            @using (Ajax.BeginForm("UpdateCustomer", "Master",
+                             new AjaxOptions
+                             {
+                                 OnSuccess = "OnSuccess",
+                                 OnFailure = "OnFailure",
+                                 LoadingElementId = "progress",
+                                 UpdateTargetId = "ParentDiv"
+                             }))
+
+                            {
+                                @Html.AntiForgeryToken()
+                                <h4 style="height: 32px; font-size: 20px; color:darkslateblue;"><b>Update Customer Information</b></h4>
+                                <hr style=" border: 1px solid black;">
+                                <div class="form-horizontal">
+
+
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 " style=" font-size: 16px;"><b>Customer Name: </b></label>
+                                        <div class="col-md-10">
+                                            @Html.HiddenFor(m => m.Customerid, new { @class = "form-control" })
+                                            @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.CustomerName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 " style=" font-size: 16px;"><b> Address : </b></label>
+                                        <div class="col-md-10">
+                                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.Address, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 " style=" font-size: 16px;"><b>Phone No : </b></label>
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(m => m.PhNo, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.PhNo, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <button type="submit" id="btnSave" ondblclick="this.disabled = true;" class="btn btn-md btn-success"><span class="glyphicon glyphicon-ok"></span> Save</button>
+                                            <a href="/Master/Customer" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>Cancel</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="callout callout-info" style="font-size: 16px;color:black;">
+                                            <p>Please fill the information of customer.</p>
+                                            <p>And Check Again!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <div class="text-left">
+                                        <img src="/Image/shop.jpg" class="rounded" style="padding-left: 15px; padding-right: 0px; position: absolute; ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer bg-black-gradient">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>
+                                    <span class="glyphicon glyphicon-map-marker"></span> YanKin Township,Yangon Region
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-phone-alt"></span> 09-780563429
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-envelope"></span> Email-yazarmin@myanmareasenet.com
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Hello Mobile Shop</h4>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    "Do You need a good phone!Just come to Hello Mobile Shop."
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-left">
+                                        <img src="~/Image/hello.png" class="rounded" style="padding-left: 5px;height:60px;width:80px; padding-right: 0px; position: absolute; ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</section>
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        function OnSuccess(response) {
+
+            if (response.status == true) {
+                swal(
+                    {
+                        title: "Update Customer Detail",
+                        text: response.content,
+                        type: "success"
+                    },function () {
+                        window.location.reload();
+                        window.location.href = "/Master/Customer";
+                    });
+
+            }
+            else {
+                swal(
+                    {
+                        title: "Update Customer Detail",
+                        text: response.content,
+                        type: "error"
+                    });
+            }
+        }
+
+        function OnFailure(response) {
+            swal(
+                {
+                    title: "Update Customer Detail",
+                    text: response.content,
+                    type: "error"
+                });
+        }
+
+        (function ($) {
+            var defaultOptions = {
+                errorClass: 'has-error',
+                validClass: '',
+                highlight: function (element, errorClass, validClass) {
+                    $(element).closest(".form-group")
+                        .addClass(errorClass)
+                        .removeClass(validClass);
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).closest(".form-group")
+                        .removeClass(errorClass)
+                        .addClass(validClass);
+                }
+            };
+
+            $.validator.setDefaults(defaultOptions);
+
+            $.validator.unobtrusive.options = {
+                errorClass: defaultOptions.errorClass,
+                validClass: defaultOptions.validClass,
+            };
+        })(jQuery);
+
+    </script>
+
+}
+
+
+

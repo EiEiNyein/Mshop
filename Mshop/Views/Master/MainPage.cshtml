@@ -1,0 +1,181 @@
+﻿
+@{
+    ViewBag.Title = "MainPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background: #C9D6FF;
+        background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);
+        background: linear-gradient(to right, #E2E2E2, #C9D6FF);
+    }
+
+    .a {
+        width: 305px;
+        height: 80px;
+        background-color: #305676;
+        color: #343e6e;
+        margin-left: 20px;
+        margin-top: 20px;
+        padding-right: 35px;
+        margin-bottom: 15px;
+        border-radius: 5px 5px;
+        border: 1px solid #e0e0e0;
+        box-sizing: border-box;
+    }
+    .b {
+        width: 650px;
+        height: 330px;
+        background-color:darkseagreen;
+        color: #343e6e;
+        margin-left: 55px;
+        margin-top: 20px;
+        padding-right: 35px;
+        margin-bottom: 15px;
+        border-radius: 5px 5px;
+        border: 1px solid #e0e0e0;
+        box-sizing: border-box;
+    }
+    .c {
+        width: 305px;
+        height: 210px;
+        background-color: lightgray;
+        color: #343e6e;
+        margin-left: 30px;
+        margin-top: 20px;
+        padding-right: 35px;
+        margin-bottom: 15px;
+        border-radius: 5px 5px;
+        border: 1px solid #e0e0e0;
+        box-sizing: border-box;
+    }
+</style>
+
+
+<div class="container-fluid" style="border-radius: 5px 5px; height: 120px; padding-left: 8px; padding-top: 10px; background-color: #2b3b8a;">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-2">
+                <div class="text-left">
+                    <img src="~/Image/hello.png" class="rounded" style="border-radius: 5px 5px;  height: 95px; width: 150px; position: absolute; ">
+                </div>
+
+            </div>
+            <div class="col-md-8 text-center">
+                <h2 style="color:goldenrod;">Hello Mobile Shop</h2>
+                <br />
+                <p style="color:whitesmoke;font-size:16px;">"Do You need a good phone!Just come to <strong style="color:goldenrod;">Hello Mobile Shop</strong>."</p>
+            </div>
+
+            <div class="col-md-2">
+                <div class="text-left">
+                    <img src="~/Image/shop.jpg" class="rounded" style="border-radius: 5px 5px;  height: 95px; width: 150px; position: absolute; ">
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="panel">
+    <div class="panel-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 col-xs-8 text-center  b">
+                    <h3>Rule for Employee</h3>
+                    <p>To Check data Again after adding in the database.</p>
+                    <p>Don't allow  to change the sell phone</p>
+                </div>
+                <div class="col-md-4 col-xs-4">
+
+                    <div class="container">
+
+                        <div class="row">
+
+                            <div class="col-md-12 col-xs-12 text-center  a">
+                                <div class="card  text-white">
+                                    <h3 class="card-title text-center">
+                                        <div class="d-flex flex-wrap justify-content-center ">
+                                            <a><span class="badge hours" style="font-size:22px;"></span></a> :
+                                            <a><span class="badge min" style="font-size:22px;"></span></a> :
+                                            <a><span class="badge sec" style="font-size:22px;"></span></a>
+                                        </div>
+                                    </h3>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 text-center c">
+                            <h3>Rule for Employee</h3>
+                            <p>To Check data Again after adding in the database.</p>
+                            <p>Don't allow  to change the sell phone</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer bg-black-gradient">
+        <div class="row">
+            <div class="col-md-6">
+                <ul>
+                    <li>
+                        <span class="glyphicon glyphicon-map-marker"></span> YanKin Township,Yangon Region
+                    </li>
+                    <br />
+                    <li>
+                        <span class="glyphicon glyphicon-phone-alt"></span> 09-780563429
+                    </li>
+                    <br />
+                    <li>
+                        <span class="glyphicon glyphicon-envelope"></span> Email-yazarmin@myanmareasenet.com
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h4>Hello Mobile Shop</h4>
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        "Do You need a good phone!Just come to Hello Mobile Shop."
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-left">
+                            <img src="~/Image/hello.png" class="rounded" style="padding-left: 5px;height:60px;width:80px; padding-right: 0px; position: absolute; ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            setInterval(function () {
+                var hours = new Date().getHours();
+                $(".hours").html((hours < 10 ? "0" : "") + hours);
+            }, 1000);
+            setInterval(function () {
+                var minutes = new Date().getMinutes();
+                $(".min").html((minutes < 10 ? "0" : "") + minutes);
+            }, 1000);
+            setInterval(function () {
+                var seconds = new Date().getSeconds();
+                $(".sec").html((seconds < 10 ? "0" : "") + seconds);
+            }, 1000);
+        });
+    </script>
+
+}
+

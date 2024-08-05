@@ -1,0 +1,409 @@
+﻿@model  Mshop.Models.MobileTypeInfo
+@{
+    ViewBag.Title = "NewMobileType";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .d {
+        background-color: #f1f2f7;
+        padding: 6px;
+        height: 28px;
+        margin-top: 14px;
+    }
+    .a {
+        width: 340px;
+        height: 320px;
+        font-size: 14px;
+        background-color: #03125c;
+        color: whitesmoke;
+        margin-left: 20px;
+        /*margin-top: 20px;*/
+        padding: 30px;
+        /* margin-bottom: 15px;*/
+        border-radius: 5px 5px;
+        border: 1px solid whitesmoke;
+        box-sizing: border-box;
+    }
+
+    .b {
+       
+        font-size: 16px;
+       
+        padding: 6px;
+        height: 40px;
+    }
+    table.dataTable tbody tr.selected {
+        color: white !important;
+        background-color: #0094ff !important;
+    }
+    .callout {
+        background-color: whitesmoke;
+    }
+</style>
+<section class="content" style="min-height:500px;overflow-x:hidden;">
+    <div class="row">
+        
+            <!--breadcrumbs start -->
+           <div class="col-md-12">
+            <!--breadcrumbs start -->
+            <ul class="breadcrumb">
+                <li><a href="/Master/Home"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="/Master/NewMobileModel">Mobile Model</a></li>
+                <li class="active">Mobile Type</li>
+            </ul>
+            <!--breadcrumbs end -->
+        
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel">
+                <div class="panel-heading" style="background-color: white; color: #343e6e; border: 3px solid #f1f2f7; border-top-color: #1b4a6e; border-radius: 5px 5px; ">
+                    <strong  class="panel-title"> New Mobile Type</strong> 
+                </div>
+                <div class="panel-body" style="margin-top:10px;">
+
+                    <div class="row">
+                        <div class="col-md-7">
+
+                            @using (Ajax.BeginForm("NewMobileType", "Master",
+                             new AjaxOptions
+                             {
+                                 OnSuccess = "OnSuccess",
+                                 OnFailure = "OnFailure",
+                                 LoadingElementId = "progress",
+                                 UpdateTargetId = "ParentDiv"
+                             }))
+
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="container-fluid" style="border-radius: 3px 3px; color: #343e6e; font-size: 16px; color: darkslateblue; height: 38px; padding-left: 8px; padding-top: 7px; background-color: #c8cadb; ">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <strong>Fill Mobile  Type</strong>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br />
+                                <br />
+                                <br />
+
+                                <div class="form-horizontal">
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 " style=" font-size: 16px;"><b>Mobile Name: </b></label>
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(m => m.MobileName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.MobileName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <button type="submit" id="btnSave" ondblclick="this.disabled = true;" class="btn btn-md btn-success"><span class="glyphicon glyphicon-ok"></span> Save</button>
+                                            <button type="reset" id="cancel" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>Cancel</button>
+                                        </div>
+                                    </div>
+                                    <br /><br /><br />
+
+                                </div>
+
+                            }
+                        </div>
+                        <div class="col-md-5">
+                            <div class="container">
+                                <div class=" form-group ">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12   a">
+                                            <h3>Hello Mobile Shop</h3>
+
+
+                                            <b>
+                                                <ul>
+                                                    <li>Please fill the  Mobile Name.</li>
+
+                                                    <li>And Check Again!</li>
+                                                </ul>
+                                            </b>
+
+                                            <hr style=" border: 2px solid #edf0f5;">
+
+
+                                            <img src="~/Image/phone5.jpg" class="rounded" style="height: 120px;width:270px; border-radius: 5px 5px; padding-right: 0px; position: absolute; ">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12  d">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12  b" style="background-color: white; color: #343e6e; border: 3px solid #f1f2f7; border-top-color: #1b4a6e; border-radius: 5px 5px; ">
+                                <span class="glyphicon glyphicon-th-list"></span> <strong>Mobile Model List</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="row col-md-12" style="overflow-x:hidden;">
+                        <table id="tblmobile" class="table table-bordered nowrap table-striped" cellspacing="0" style="width:100%;">
+                            <thead style="font-style:bold;font-size:14px;">
+                                <tr>
+
+                                    <th>Action</th>
+                                    <th>Mobile Id</th>
+                                    <th>Mobile Name</th>
+
+                                </tr>
+                            </thead>
+
+                        </table>
+
+                    </div>
+                </div>
+                <div class="panel-footer bg-black-gradient">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>
+                                    <span class="glyphicon glyphicon-map-marker"></span> YanKin Township,Yangon Region
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-phone-alt"></span> 09-780563429
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-envelope"></span> Email-yazarmin@myanmareasenet.com
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Hello Mobile Shop</h4>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    "Do You need a good phone!Just come to Hello Mobile Shop."
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-left">
+                                        <img src="~/Image/hello.png" class="rounded" style="padding-left: 5px;height:60px;width:80px; padding-right: 0px; position: absolute; ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</section>
+
+
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var tbl = FillGrid();
+            $("#cancel").click(function () {
+
+                $("#MobileName").val('');
+
+
+            });
+        });
+        function OnSuccess(response) {
+
+            if (response.status == true) {
+                swal(
+                    {
+                        title: "New Mobile Type",
+                        text: response.content,
+                        type: "success"
+                    },function () {
+                        window.location.reload();
+                        window.location.href = "/Master/NewMobileType";
+                    });
+
+            }
+            else {
+                swal(
+                    {
+                        title: "New Mobile Type",
+                        text: response.content,
+                        type: "error"
+                    });
+            }
+        }
+
+        function OnFailure(response) {
+            swal(
+                {
+                    title: "New Mobile Type",
+                    text: response.content,
+                    type: "error"
+                });
+        }
+
+        (function ($) {
+            var defaultOptions = {
+                errorClass: 'has-error',
+                validClass: '',
+                highlight: function (element, errorClass, validClass) {
+                    $(element).closest(".form-group")
+                        .addClass(errorClass)
+                        .removeClass(validClass);
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).closest(".form-group")
+                        .removeClass(errorClass)
+                        .addClass(validClass);
+                }
+            };
+
+            $.validator.setDefaults(defaultOptions);
+
+            $.validator.unobtrusive.options = {
+                errorClass: defaultOptions.errorClass,
+                validClass: defaultOptions.validClass,
+            };
+        })(jQuery);
+        function FillGrid() {
+            var table = $('#tblmobile').DataTable(
+                {
+                    "destroy": true,
+                    "responsive": true,
+                    "pageLength": 1,
+                    "scrollX": true,
+                    "lengthMenu": [1,3,5,10, 15, 20, 25, 50, 75, 100],
+                    dom: "<'row'<'col-sm-6'B><'col-sm-6'f> >" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-4'l><'col-sm-4'i><'col-sm-4'p>>",
+                    buttons: [
+                        'colvis',
+                        {
+                            extend: 'excelHtml5',
+                            footer: true,
+                            title: 'Mobile Type',
+                            exportOptions: {
+                                columns: [1, 2, 3]
+                            },
+                            filename: function () {
+                                return "Mobile Type";
+                            },
+                            customize: function (xlsx) {
+                                var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                                $('c[r=A1]', sheet).attr('s', '50');
+                                $('c[r=A1]', sheet).attr('s', '2');
+                                $('c[r=A2]', sheet).attr('s', '50');
+                                $('c[r=A2]', sheet).attr('s', '2');
+                            }
+                        },
+
+                    ],
+                    "ajax": {
+
+                        "url": "/api/MasterData/GetMobileType",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ''
+                    },
+                    "columns": [
+                        { "data": "mobileid" },
+                        { "data": "mobileid" },
+                        { "data": "mobileName" },
+
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": 0,
+                            "data": "mobileid",
+                            "bSortable": false,
+                            "render": function (data, type, row) {
+
+                                str = '<a href="#" id="' + data + '" onclick=UpdateMobileType(this.id) class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-edit"></span> </a> <a href="#" id="' + data + '" onclick="DeleteMobileType(this.id);" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></a>';
+                                return str;
+
+                            }
+                        },
+                    ]
+                });
+            return table;
+        }
+
+        function UpdateMobileType(id) {
+            window.location.href = "/Master/UpdateMobileType/" + id;
+        }
+
+        function DeleteMobileType(id) {
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Yes, I am sure!',
+                cancelButtonText: "No, cancel it!",
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                showLoaderOnConfirm: true
+            },
+                function (isConfirm) {
+
+                    if (isConfirm) {
+                        $.ajax({
+                            url: '/api/MasterData/DeleteMobileType/?id=' + id,
+                            type: "GET",
+                            dataType: "JSON",
+                            dataSrc: '',
+                            success: function (response) {
+                                if (response.status) {
+                                    swal({
+                                        title: "Delete Mobile Name",
+                                        text: response.content,
+                                        type: "success"
+                                    }, function () {
+                                        window.location.reload(true);
+                                    });
+                                }
+                                else {
+                                    swal({
+                                        title: "Delete Mobile Name",
+                                        text: response.content,
+                                        type: "error",
+                                        showConfirmButton: true
+                                    }, function () {
+                                        window.location.reload(true);
+                                    });
+
+                                }
+                                FillGrid();
+                            }
+                        });
+                    } else {
+                        swal.close();
+                    }
+                });
+        }
+    </script>
+
+}
+
+

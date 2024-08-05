@@ -1,0 +1,515 @@
+﻿@model Mshop.Models.MobileModelInfo
+@{
+    ViewBag.Title = "NewMobileModel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .callout {
+        background-color: whitesmoke;
+    }
+    .a {
+        width: 310px;
+        height: 340px;
+        font-size: 14px;
+        background-color: #03125c;
+        color: whitesmoke;
+        margin-left: 20px;
+        /*margin-top: 20px;*/
+        padding: 30px;
+        /* margin-bottom: 15px;*/
+        border-radius: 5px 5px;
+        border: 1px solid whitesmoke;
+        box-sizing: border-box;
+    }
+
+    .d {
+        background-color: #f1f2f7;
+        padding: 6px;
+        height: 32px;
+        margin-top: 14px;
+    }
+
+    .b {
+        font-size: 16px;
+        padding: 6px;
+        height: 40px;
+    }
+    table.dataTable tbody tr {
+        height:28px;
+        font-size:12px;
+     }
+    
+</style>
+<section class="content" style="min-height:500px;overflow-x:hidden;">
+    <div class="row">
+        <div class="col-md-12 ">
+            <!--breadcrumbs start -->
+            <ul class="breadcrumb ">
+                <li><a href="/Master/Home"><i class="fa fa-home"></i> Home</a></li>
+
+                <li class="active">New Mobile Model</li>
+            </ul>
+            <!--breadcrumbs end -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading" style="background-color: white; color: #343e6e;font-size:16px; border: 3px solid #f1f2f7; border-top-color: #1b4a6e; border-radius: 5px 5px;">
+                    <strong>New Mobile Model</strong>
+                </header>
+                <div class="panel-body" style="margin-top:10px;">
+
+                    <div class="row">
+                        <div class="col-md-8">
+
+                            @using (Ajax.BeginForm("NewMobileModel", "Master",
+                             new AjaxOptions
+                             {
+                                 OnSuccess = "OnSuccess",
+                                 OnFailure = "OnFailure",
+                                 LoadingElementId = "progress",
+                                 UpdateTargetId = "ParentDiv"
+                             }))
+
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="container-fluid" style="border-radius: 3px 3px; color: #343e6e; font-size: 16px; color: darkslateblue; height: 38px; padding-left: 8px; padding-top: 7px; background-color: #c8cadb; ">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <strong>Fill Mobile  Information</strong>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br />
+                                <br />
+                             
+
+                                <div class="form-horizontal">
+                                    <div class="row">
+                                        <label class="col-md-8 " style=" font-size: 16px;"><b> To fill new mobile type: </b></label>
+                                        <div class="col-md-4">
+                                            <a href="/Master/NewMobileType/" class="btn btn-primary" id="btnFill"><span class="glyphicon glyphicon-plus-sign"></span> Fill Phone Name</a>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row ">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Mobile Id: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.DropDownListFor(m => m.Mobileid,
+                                                       new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "--Please select-- ",
+                                                       new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(x => x.Mobileid, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b> Model: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.Model, new { @class = "form-control",@placeholder="Model/Ram"})
+                                                    @Html.ValidationMessageFor(x => x.Model, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br />
+
+                                    <div class="row ">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Color : </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.Color, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.Color, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Price : </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @type = "number" })
+                                                    @Html.ValidationMessageFor(x => x.Price, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br />
+
+                                    <div class="row ">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 15px;"><b>Warranty : </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.Warranty, new { @class = "form-control", @type = "number" })
+                                                    @Html.ValidationMessageFor(x => x.Warranty, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Stock : </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.Stock, new { @class = "form-control", @type = "number" })
+                                                    @Html.ValidationMessageFor(x => x.Stock, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-4">
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-offset-2 col-md-10">
+                                                        <div class="col-md-6">
+
+                                                            <button type="submit" id="btnSave" ondblclick="this.disabled = true;" class="btn btn-md btn-success"><span class="glyphicon glyphicon-ok"></span> Save</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <a href="/Master/MobileModel" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>Cancel</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-4">
+                            <div class="container">
+                                <div class=" form-group ">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12   a">
+                                            <h3>Hello Mobile Shop</h3>
+
+
+                                            <b>
+                                                <ul>
+                                                    <li>Please fill the model of Phone.</li>
+
+                                                    <li>And Check Again!</li>
+                                                </ul>
+                                            </b>
+
+                                            <hr style=" border: 2px solid #edf0f5;">
+
+
+                                            <img src="~/Image/phone2.jpg" class="rounded" style="height: 130px;width:250px; border-radius: 5px 5px; padding-right: 0px; position: absolute; ">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12  d">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12  b" style="background-color: white; color: #343e6e; border: 3px solid #f1f2f7; border-top-color: #1b4a6e; border-radius: 5px 5px; ">
+                                <span class="glyphicon glyphicon-th-list"></span> <strong>Mobile Model List</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-md-12" style="overflow-x:hidden;">
+                        <table id="tblmobile" class="table table-bordered nowrap table-striped" cellspacing="0" style="width:100%;">
+                            <thead style="font-style:bold;font-size:14px;">
+                                <tr>
+                                    <th>Action</th>
+                                    
+                                    <th>Mobile Name</th>
+                                    <th>Model</th>
+                                    <th>Color</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Warranty</th>
+
+                                </tr>
+                            </thead>
+
+                        </table>
+
+                    </div>
+                </div>
+                <div class="panel-footer bg-black-gradient">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>
+                                    <span class="glyphicon glyphicon-map-marker"></span> YanKin Township,Yangon Region
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-phone-alt"></span> 09-780563429
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-envelope"></span> Email-yazarmin@myanmareasenet.com
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Hello Mobile Shop</h4>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    "Do You need a good phone!Just come to Hello Mobile Shop."
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-left">
+                                        <img src="~/Image/hello.png" class="rounded" style="padding-left: 5px;height:60px;width:80px; padding-right: 0px; position: absolute; ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</section>
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        function OnSuccess(response) {
+
+            if (response.status == true) {
+                swal(
+                    {
+                        title: "New Mobile Model",
+                        text: response.content,
+                        type: "success"
+                    },function () {
+                        window.location.reload();
+                        window.location.href = "/Master/NewMobileModel";
+                    });
+
+            }
+            else {
+                swal(
+                    {
+                        title: "New Mobile Model",
+                        text: response.content,
+                        type: "error"
+                    });
+            }
+        }
+
+        function OnFailure(response) {
+            swal(
+                {
+                    title: "New Mobile Model",
+                    text: response.content,
+                    type: "error"
+                });
+        }
+        $(document).ready(function () {
+
+
+            var tbl = FillGrid();
+            $('.select2').select2({ width: '100%' });// for combobox
+
+
+            GetMobileid();
+        });
+        function FillGrid() {
+            var table = $('#tblmobile').DataTable(
+                {
+                    "destroy": true,
+                    "responsive": true,
+                    "pageLength": 3,
+                    "scrollX": true,
+                    "lengthMenu": [3, 5, 10, 15, 20, 25, 50, 75, 100],
+                    dom: "<'row'<'col-sm-6'B><'col-sm-6'f> >" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-4'l><'col-sm-4'i><'col-sm-4'p>>",
+                    buttons: [
+                        
+                        {
+                            extend: 'excelHtml5',
+                            footer: true,
+                            title: 'Mobile Type',
+                            exportOptions: {
+                                columns: [1, 2, 3]
+                            },
+                            filename: function () {
+                                return "Mobile Type";
+                            },
+                            customize: function (xlsx) {
+                                var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                                $('c[r=A1]', sheet).attr('s', '50');
+                                $('c[r=A1]', sheet).attr('s', '2');
+                                $('c[r=A2]', sheet).attr('s', '50');
+                                $('c[r=A2]', sheet).attr('s', '2');
+                            }
+                        },
+
+
+                    ],
+                    "ajax": {
+
+                        "url": "/api/MasterData/GetMobileModel",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ''
+                    },
+                    "columns": [
+                        { "data": "typeid" },
+                        /*{ "data": "typeid" },*/
+                        { "data": "mobileName" },
+                        { "data": "model" },
+                        { "data": "color" },
+                        {
+                            "data": "price",
+                            'render': function (price) {
+                                return price + "MMK";
+                            }
+                        },
+                        { "data": "stock" },
+                        { "data": "warranty" },
+
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": 0,
+                            "data": "typeid",
+                            "bSortable": false,
+                            "render": function (data, type, row) {
+
+                                str = '<a href="#" id="' + data + '" onclick=UpdateModel(this.id) class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-edit"></span></a> <a href="#" id="' + data + '" onclick="DeleteModel(this.id);" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></a>';
+                                return str;
+
+                            }
+                        },
+                    ]
+                });
+            return table;
+        }
+
+        function UpdateModel(id) {
+            window.location.href = "/Master/UpdateModel/" + id;
+        }
+
+
+        //function DeleteModel(id) {
+        //    window.location.href = "/api/MasterData/DeleteModel/?id=" + id;
+        //}
+
+
+        function DeleteModel(id) {
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Yes, I am sure!',
+                cancelButtonText: "No, cancel it!",
+                closeOnConfirm: false,
+                closeOnCancel: true
+
+            },
+                function (isConfirm) {
+
+                    if (isConfirm) {
+                        $.ajax({
+                            url: '/api/MasterData/DeleteModel/?id=' + id,
+                            type: "GET",
+                            dataType: "JSON",
+                            dataSrc: '',
+                            success: function (response) {
+                                if (response.status) {
+                                    swal({
+                                        title: "Delete Mobile Model",
+                                        text: response.content,
+                                        type: "success"
+                                    }, function () {
+                                        window.location.reload(true);
+                                    });
+                                }
+                                else {
+                                    swal({
+                                        title: "Delete Mobile Model",
+                                        text: response.content,
+                                        type: "error",
+                                        showConfirmButton: true
+                                    }, function () {
+                                        window.location.reload(true);
+                                    });
+
+                                }
+                                FillGrid();
+                            }
+                        });
+                    } else {
+                        swal.close();
+                    }
+                });
+        }
+        function GetMobileid() {
+            $('#Mobileid').empty();
+            $("#Mobileid").append($('<option></option>').html('---Please Select ---'));
+            $.getJSON('/api/MasterData/GetMobileType', 'GET').done(function (items) {
+                $.each(items, function (i, item) {
+                    $("#Mobileid").append($('<option></option>').val(item.mobileid).html(item.mobileName));
+                });
+            });
+        }
+        (function ($) {
+            var defaultOptions = {
+                errorClass: 'has-error',
+                validClass: '',
+                highlight: function (element, errorClass, validClass) {
+                    $(element).closest(".form-group")
+                        .addClass(errorClass)
+                        .removeClass(validClass);
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).closest(".form-group")
+                        .removeClass(errorClass)
+                        .addClass(validClass);
+                }
+            };
+
+            $.validator.setDefaults(defaultOptions);
+
+            $.validator.unobtrusive.options = {
+                errorClass: defaultOptions.errorClass,
+                validClass: defaultOptions.validClass,
+            };
+        })(jQuery);
+
+    </script>
+
+}

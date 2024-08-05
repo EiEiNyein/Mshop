@@ -1,0 +1,983 @@
+﻿@model Mshop.Models.MobileSaleInfo
+@{
+    ViewBag.Title = "SaleInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    table.dataTable tbody tr.selected {
+        color: white !important;
+        background-color: #0094ff !important;
+    }
+    .a {
+        width: 350px;
+        height: 330px;
+        font-size: 14px;
+        background-color: #03125c;
+        color: whitesmoke;
+        margin-left: 20px;
+        /*margin-top: 20px;*/
+        padding: 30px;
+        /* margin-bottom: 15px;*/
+        border-radius: 5px 5px;
+        border: 1px solid whitesmoke;
+        box-sizing: border-box;
+    }
+    .b {
+        background-color: white;
+        border: 3px solid #f1f2f7;
+        border-top-color: #1b4a6e;
+        border-radius: 5px 5px;
+        font-size: 16px;
+        color: #343e6e;
+        padding: 6px;
+        height: 40px;
+    }
+    .d {
+        background-color: #f1f2f7;
+        padding: 6px;
+        height: 32px;
+        margin-top: 14px;
+    }
+</style>
+<section class="content" style="min-height:500px;overflow-x:hidden;">
+    <div class="row">
+        <div class="col-md-12">
+            <!--breadcrumbs start -->
+            <ul class="breadcrumb">
+                <li><a href="/Master/Home"><i class="fa fa-home"></i> Home</a></li>
+                <li class="active">Sale Information</li>
+            </ul>
+            <!--breadcrumbs end -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading" style="background-color:white; color: #343e6e; font-size: 16px; border: 3px solid #f1f2f7; border-top-color: #1b4a6e; border-radius: 5px 5px; ">
+                    <strong>Hello Mobile Shop</strong>
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                       
+                        <div class="col-md-7">
+
+
+                            <div class="container-fluid" style="border-radius: 3px 3px; color: #343e6e; font-size: 16px; color: darkslateblue; height: 38px; padding-left: 8px; padding-top: 7px; background-color: #c8cadb; ">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <strong>Sale Information</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-horizontal">
+
+                                <div class="form-group">
+                                    <label class="col-md-5 " style=" font-size: 16px;"><b>New Sale Information: </b></label>
+                                    <div class="col-md-7">
+
+                                        <a href="/Master/NewSaleInfo/" class="btn btn-info" id="btnNew"><span class="glyphicon glyphicon-plus"></span>New</a>
+
+
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <label class="col-md-5 " style=" font-size: 16px;"><b>Phone Sale Information: </b></label>
+                                    <div class="col-md-7">
+                                        @Html.CheckBoxFor(m => m.Check1, new { @class = "checkbox" })
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <label class="col-md-5 " style=" font-size: 16px;"><b>Accessories Sale Information: </b></label>
+                                    <div class="col-md-7">
+                                        @Html.CheckBoxFor(m => m.Check2, new { @class = "checkbox" })
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-5">
+                            
+                                <div class="container">
+                                    <div class=" form-group ">
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-12   a">
+                                                <h3>Hello Mobile Shop</h3>
+                                                <b>
+                                                    <ul>
+                                                        <li>Please check the sale information.</li>
+
+                                                        <li>And Check Again!</li>
+                                                    </ul>
+                                                </b>
+
+                                                <hr style=" border: 2px solid #edf0f5;">
+
+
+                                                <img src="~/Image/sale1.png" class="rounded" style="height: 130px;width:285px; border-radius: 5px 5px; padding-right: 0px; position: absolute; ">
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                             
+                        </div>
+                    </div>
+                    
+                   
+                    <div class="form-group hidden" id="phone">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12  d">
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12  b">
+                                    <strong>Phone Sale Information</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row col-md-12" style="overflow-x:hidden;">
+                            <div class="form-group @*hidden*@" id="table">
+                                <table id="tblmobile" class="table table-bordered nowrap table-striped" cellspacing="0" style="width:100%;">
+                                    <thead style="font-style:bold;font-size:14px;">
+                                        <tr>
+                                            <th>Action</th>
+                                            <th>Customer Name</th>
+                                            <th>Address</th>
+                                            <th>Phone No</th>
+                                            <th>Mobile Name</th>
+                                            <th>Mobile Model</th>
+                                            <th>Mobile Color</th>
+                                            <th>Price</th>
+                                            <th>Date</th>
+                                            <th>Warranty</th>
+                                            <th>Qty</th>
+                                            <th>Employee Name</th>
+                                            <th>Total Amount</th>
+
+                                        </tr>
+                                    </thead>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group hidden" id="Accessories">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12  d">
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12  b">
+                                    <strong>Accessories Sale Information</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row col-md-12" style="overflow-x:hidden;">
+                            <div class="form-group @*hidden*@" id="table">
+                                <table id="tblmobile1" class="table table-bordered nowrap table-striped" cellspacing="0" style="width:100%;">
+                                    <thead style="font-style:bold;font-size:14px;">
+                                        <tr>
+                                            <th>Action</th>
+                                            <th>Sale ID</th>
+                                            <th>Customer Name</th>
+                                            <th>Address</th>
+                                            <th>Phone No</th>
+                                            <th>Brand Name</th>
+                                            <th>Type</th>
+                                            <th> Model</th>
+                                            <th>Price</th>
+                                            <th>Color</th>
+                                            <th>Warranty</th>
+                                            <th>Qty</th>
+                                            <th>Employee Name</th>
+                                            <th>Total Amount</th>
+
+                                        </tr>
+                                    </thead>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel-footer bg-black-gradient" style="margin-top:30px;">
+                   
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>
+                                    <span class="glyphicon glyphicon-map-marker"></span> YanKin Township,Yangon Region
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-phone-alt"></span> 09-780563429
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-envelope"></span> Email-yazarmin@myanmareasenet.com
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Hello Mobile Shop</h4>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    "Do You need a good phone!Just come to Hello Mobile Shop."
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-left">
+                                        <img src="~/Image/hello.png" class="rounded" style="padding-left: 5px;height:60px;width:80px; padding-right: 0px; position: absolute; ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</section>
+<div class="modal fade" id="modalAddparti" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width:700px;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#2b3b8a; color: whitesmoke; font-size: 16px; @*border: 2px solid #f1f2f7;*@ border-color: #03125c; border-radius: 5px 5px; ">
+                <!-- /modal Header-->
+                <button type="button" class="close" style="color: red;opacity:0.5;" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
+                @*<button type="button" class="close" style="color: red;" data-dismiss="modal" aria-hidden="true">&times;</button>*@
+                <h4 class="modal-title">View Mobile Sale Information</h4>
+            </div>
+            <!-- modal body-->
+            <div class="modal-body">
+
+
+                <div class="form-horizontal" style="padding-left:15px;">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group hidden">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Sale ID: </b></label>
+                                <div class="col-md-6">
+
+                                    @Html.TextBoxFor(m => m.Saleid, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Customer Name: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Address </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Phone No: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.PhNo, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Mobile Name: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b> Model : </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Model, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b> Color : </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Colour, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Price : </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Date: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Date, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Warranty: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Warranty, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Qty: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Qty, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Sale Person: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Employeeid, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group ">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>TotalAmount: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width:700px;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#2b3b8a; color: whitesmoke; font-size: 16px; @*border: 2px solid #f1f2f7;*@ border-color: #03125c; border-radius: 5px 5px; ">
+                <!-- /modal Header-->
+                <button type="button" class="close" style="color: red;opacity:0.5;" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
+                @*<button type="button" class="close" style="color: red;" data-dismiss="modal" aria-hidden="true">&times;</button>*@
+                <h4 class="modal-title">View Mobile Sale Information</h4>
+            </div>
+            <!-- modal body-->
+            <div class="modal-body">
+
+
+                <div class="form-horizontal" style="padding-left:15px;">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group hidden">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Accessories ID: </b></label>
+                                <div class="col-md-6">
+
+                                    @Html.TextBoxFor(m => m.Bid, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Sale ID: </b></label>
+                                <div class="col-md-6">
+
+                                    @Html.TextBoxFor(m => m.Sale, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Customer Name: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Customer, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Address </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Addr, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Phone No: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Brand Name: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.BrandName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b> Type : </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Type, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b> Model : </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Mode, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Price : </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Pri, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Color: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Colo, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Warranty: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.War, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Qty: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Qt, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>Sale Person: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Employee, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group ">
+                                <label class="col-md-6 " style=" font-size: 16px;"><b>TotalAmount: </b></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Total, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var tbl = FillGrid();
+          var tb =  FillGridAc();
+            $("#Check2").change(function () {
+                if ($('#Check2').is(":checked")) {
+                    $('#Check2').prop("checked", true);
+                    $('#Check1').prop("checked", false);
+                    $("#phone").addClass('hidden');
+                    $("#Accessories").removeClass('hidden');
+
+
+                }
+                else {
+                    $('#Check2').prop("checked", false);
+                    $('#Check1').prop("checked", true);
+                    $("#phone").removeClass('hidden');
+                    $("#Accessories").addClass('hidden');
+
+                }
+            });
+
+            $("#Check1").change(function () {
+                if ($('#Check1').is(":checked")) {
+                    $('#Check1').prop("checked", true);
+                    $('#Check2').prop("checked", false);
+                    $("#Accessories").addClass('hidden');
+                    $("#phone").removeClass('hidden');
+
+
+                }
+                else {
+                    $('#Check1').prop("checked", false);
+                    $('#Check2').prop("checked", true);
+                    $("#Accessories").removeClass('hidden');
+                    $("#phone").addClass('hidden');
+
+                }
+            });
+        });
+
+
+        function FillGrid() {
+            var table = $('#tblmobile').DataTable(
+                {
+                    "destroy": true,
+                    "responsive": true,
+                    "pageLength": 3,
+                    "scrollX": true,
+                    "lengthMenu": [3,5,10, 15, 20, 25, 50, 75, 100],
+                    dom: "<'row'<'col-sm-6'B><'col-sm-6'f> >" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-4'l><'col-sm-4'i><'col-sm-4'p>>",
+                    buttons: [
+                        'colvis',
+                        {
+                            extend: 'excelHtml5',
+                            footer: true,
+                            title: 'Sale Info',
+                            exportOptions: {
+                                columns: [1, 2, 3]
+                            },
+                            filename: function () {
+                                return "Sale Info";
+                            },
+                            customize: function (xlsx) {
+                                var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                                $('c[r=A1]', sheet).attr('s', '50');
+                                $('c[r=A1]', sheet).attr('s', '2');
+                                $('c[r=A2]', sheet).attr('s', '50');
+                                $('c[r=A2]', sheet).attr('s', '2');
+                            }
+                        },
+
+                       
+                    ],
+                    "ajax": {
+
+                        "url": "/api/MasterData/GetSaleInfo",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ''
+                    },
+                    "columns": [
+                        { "data": "saleid" },
+                        /*{ "data": "saleid" },*/
+                        { "data": "customerName" },
+                        { "data": "address" },
+                        { "data": "phNo" },
+                        { "data": "mobileName" },
+                        { "data": "model" },
+                        { "data": "color" },
+                        {
+                            "data": "price",
+                            'render': function (price) {
+                                return price + "MMK";
+                            }
+                        },
+                        {
+                            "data": "date"
+                        },
+                        { "data": "warranty" },
+                        { "data": "qty" },
+                        { "data": "employeeName" },
+                        { "data": "totalAmount" },
+
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": 0,
+                            "data": "saleid",
+                            "bSortable": false,
+                            "render": function (data, type, row) {
+                                var ro = row.saleid + "*" + row.customerName + "*" + row.address + "*" + row.phNo + "*" + row.mobileName + "*" + row.model + "*" + row.color + "*" + row.price + "*" + row.date + "*" + row.warranty + "*" + row.qty + "*" + row.employeeName + "*" + row.totalAmount;
+                                str = '<a href="#" id="' + ro +'" onclick=ViewSaleInfo(this.id) class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-eye-open"></span> </a> <a href="#" id="' + data + '" onclick="DeleteSaleInfo(this.id);" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></a>';
+                                return str;
+
+                            }
+                        },
+                        {
+                            "targets": [8],
+                            "data": "",
+                            "render": function (data, type, row) {
+                                if (data != null) {
+
+                                    return (moment(data).format("YYYY-MM-DD"));
+                                }
+                                else {
+                                    return "";
+                                }
+
+                            }
+                        },
+                    ]
+                });
+            return table;
+        }
+
+        function FillGridAc() {
+            var table = $('#tblmobile1').DataTable(
+                {
+                    "destroy": true,
+                    "responsive": true,
+                    "pageLength": 3,
+                    "scrollX": true,
+                    "lengthMenu": [3, 5, 10, 15, 20, 25, 50, 75, 100],
+                    dom: "<'row'<'col-sm-6'B><'col-sm-6'f> >" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-4'l><'col-sm-4'i><'col-sm-4'p>>",
+                    buttons: [
+                        'colvis',
+                        {
+                            extend: 'excelHtml5',
+                            footer: true,
+                            title: 'Sale Info',
+                            exportOptions: {
+                                columns: [1, 2, 3]
+                            },
+                            filename: function () {
+                                return "Sale Info";
+                            },
+                            customize: function (xlsx) {
+                                var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                                $('c[r=A1]', sheet).attr('s', '50');
+                                $('c[r=A1]', sheet).attr('s', '2');
+                                $('c[r=A2]', sheet).attr('s', '50');
+                                $('c[r=A2]', sheet).attr('s', '2');
+                            }
+                        },
+
+
+                    ],
+                    "ajax": {
+
+                        "url": "/api/MasterData/GetAccSale",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ''
+                    },
+                    "columns": [
+                        { "data": "bid" },
+                        { "data": "saleid" },
+                        { "data": "customerName" },
+                        { "data": "address" },
+                        { "data": "phNo" },
+                        { "data": "brandName" },
+                        { "data": "type" },
+                        { "data": "model" },
+                        {
+                            "data": "price",
+                            'render': function (price) {
+                                return price + "MMK";
+                            }
+                        },
+                        { "data": "color"},
+                        { "data": "warranty"},
+                        { "data": "qty" },
+                        { "data": "employeeName" },
+                        { "data": "totalAmount" },
+
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": 0,
+                            "data": "bid",
+                            "bSortable": false,
+                            "render": function (data, type, row) {
+                                var ro = row.bid + "*" + row.saleid + "*" + row.customerName + "*" + row.address + "*" + row.phNo + "*" + row.brandName + "*" + row.type + "*" + row.model + "*" + row.price + "*" + row.color + "*" + row.warranty + "*" + row.qty + "*" + row.employeeName + "*" + row.totalAmount;
+                                str = '<a href="#" id="' + ro +'" onclick=ViewAccInfo(this.id) class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-eye-open"></span> </a> <a href="#" id="' + data + '" onclick="DeleteAccSale(this.id);" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></a>';
+                                return str;
+
+                            }
+                        },
+                       
+                    ]
+                });
+            return table;
+        }
+        function ViewSaleInfo(id) {
+
+            $("#Saleid").val(id.split('*')[0]);
+            $("#CustomerName").val(id.split('*')[1]);
+            $("#Address").val(id.split('*')[2]);
+            $("#PhNo").val(id.split('*')[3]);
+            $("#Name").val(id.split('*')[4]);
+            $("#Model").val(id.split('*')[5]);
+            $("#Colour").val(id.split('*')[6]);
+            $("#Price").val(id.split('*')[7]);
+            $("#Date").val(id.split('*')[8]);
+            $("#Warranty").val(id.split('*')[9]);
+            $("#Qty").val(id.split('*')[10]);
+            $("#Employeeid").val(id.split('*')[11]);
+            $("#TotalAmount").val(id.split('*')[12]);
+
+
+            /* window.location.href = "/Repair/GetRepairId/" + id;*/
+            $("#modalAddparti").modal('show');
+        }
+        function ViewAccInfo(id) {
+
+            $("#Bid").val(id.split('*')[0]);
+            $("#Sale").val(id.split('*')[1]);
+            $("#Customer").val(id.split('*')[2]);
+            $("#Addr").val(id.split('*')[3]);
+            $("#Phone").val(id.split('*')[4]);
+            $("#BrandName").val(id.split('*')[5]);
+            $("#Type").val(id.split('*')[6]);
+            $("#Mode").val(id.split('*')[7]);
+            $("#Pri").val(id.split('*')[8]);
+            $("#Colo").val(id.split('*')[9]);
+            $("#War").val(id.split('*')[10]);
+            $("#Qt").val(id.split('*')[11]);
+            $("#Employee").val(id.split('*')[12]);
+            $("#Total").val(id.split('*')[13]);
+           
+
+            /* window.location.href = "/Repair/GetRepairId/" + id;*/
+            $("#modalAdd").modal('show');
+        }
+        function UpdateSaleInfo(id) {
+            window.location.href = "/Master/UpdateSaleInfo/" + id;
+        }
+
+        function DeleteSaleInfo(id) {
+                    swal({
+                        title: "Are you sure?",
+                        text: "You will not be able to recover this imaginary file!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: '#DD6B55',
+                        confirmButtonText: 'Yes, I am sure!',
+                        cancelButtonText: "No, cancel it!",
+                        closeOnConfirm: false,
+                        closeOnCancel: false,
+                        showLoaderOnConfirm: true
+                    },
+                        function (isConfirm) {
+
+                            if (isConfirm) {
+                                $.ajax({
+                                    url: '/api/MasterData/DeleteSaleInfo/?id=' + id,
+                                    type: "GET",
+                                    dataType: "JSON",
+                                    dataSrc: '',
+                                    success: function (response) {
+                                        if (response.status) {
+                                            swal({
+                                                title: "Delete Sale Information",
+                                                text: response.content,
+                                                type: "success"
+                                            }, function () {
+                                                window.location.reload(true);
+                                            });
+                                        }
+                                        else {
+                                            swal({
+                                                title: "Delete Sale Information",
+                                                text: response.content,
+                                                type: "error",
+                                                showConfirmButton: true
+                                            }, function () {
+                                                window.location.reload(true);
+                                            });
+
+                                        }
+                                        FillGrid();
+                                    }
+                                });
+                            } else {
+                                swal.close();
+                            }
+                        });
+        }
+
+        function DeleteAccSale(id) {
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Yes, I am sure!',
+                cancelButtonText: "No, cancel it!",
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                showLoaderOnConfirm: true
+            },
+                function (isConfirm) {
+
+                    if (isConfirm) {
+                        $.ajax({
+                            url: '/api/MasterData/DeleteAccSale/?id=' + id,
+                            type: "GET",
+                            dataType: "JSON",
+                            dataSrc: '',
+                            success: function (response) {
+                                if (response.status) {
+                                    swal({
+                                        title: "Delete Accessories Sale Information",
+                                        text: response.content,
+                                        type: "success"
+                                    }, function () {
+                                        window.location.reload(true);
+                                    });
+                                }
+                                else {
+                                    swal({
+                                        title: "Delete  Accessories  Sale Information",
+                                        text: response.content,
+                                        type: "error",
+                                        showConfirmButton: true
+                                    }, function () {
+                                        window.location.reload(true);
+                                    });
+
+                                }
+                                FillGrid();
+                            }
+                        });
+                    } else {
+                        swal.close();
+                    }
+                });
+        }
+
+        function UpdateAccSale(id) {
+            window.location.href = "/Master/UpdateAccSale/" + id;
+        }
+
+
+    </script>
+
+
+}
+
+
+

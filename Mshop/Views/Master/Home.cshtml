@@ -1,0 +1,489 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    table.dataTable tbody tr.selected {
+        color: white !important;
+        background-color: #0094ff !important;
+    }
+
+    .form-group {
+        margin-top: 15px;
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .d {
+        background-color: #f1f2f7;
+        padding: 6px;
+        height: 32px;
+        margin-top: 14px;
+    }
+
+    .c {
+        background-color: white;
+        font-size: 16px;
+        border: 3px solid #f1f2f7;
+        border-top-color: #1b4a6e;
+        border-radius: 5px 5px;
+        color: #343e6e;
+        padding: 6px;
+        height: 32px;
+        margin-top: -15px;
+        margin-bottom: 10px;
+        height: 40px;
+    }
+
+    .b {
+        background-color: white;
+        border: 3px solid #f1f2f7;
+        border-top-color: #1b4a6e;
+        border-radius: 5px 5px;
+        font-size: 16px;
+        color: #343e6e;
+        padding: 6px;
+        height: 40px;
+    }
+
+    .container-border {
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    .a {
+        width: 250px;
+        height: 120px;
+        font-size: 16px;
+        background-color: white;
+        color: #343e6e;
+        margin-left: 65px;
+        margin-top: 20px;
+        padding: 35px;
+        margin-bottom: 15px;
+        border-radius: 5px 5px;
+        border: 1px solid #e0e0e0;
+        box-sizing: border-box;
+    }
+</style>
+<section class="content" style="min-height:500px;overflow-x:hidden;">
+    <div class="row">
+        <div class="col-md-12">
+            <!--breadcrumbs start -->
+            <ul class="breadcrumb">
+                <li class="active"><a href="/Home/Index"><i class="fa fa-home"></i> Home</a></li>
+
+            </ul>
+            <!--breadcrumbs end -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container-fluid" style="border-radius: 5px 5px; height: 130px; padding-left: 8px; padding-top: 10px; background-color: #2b3b8a;">
+                <div class="row">
+                    <div class="col-md-7">
+
+                        <div class="row align-items-center">
+                            <div class="col-md-3">
+                                <div class="text-left">
+                                    <img src="~/Image/hello.png" class="rounded" style="border-radius: 5px 5px;  height: 100px; width: 150px; position: absolute; ">
+                                </div>
+
+                            </div>
+                            <div class="col-md-9 text-center">
+                                <h2 style="color:goldenrod;">Hello Mobile Shop</h2>
+                                <br />
+                                <p style="color:whitesmoke;font-size:16px;">"Do You need a good phone!Just come to <strong style="color:goldenrod;">Hello Mobile Shop</strong>."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                                <h4 style="color: whitesmoke;">To fill Phone and Accessories Sale Information</h4>
+                                <a href="/Master/NewSaleInfo/" class="btn btn-warning" id="btnNew">   <span class="glyphicon glyphicon-circle-arrow-right"></span> New Sale Information</a>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="text-left">
+                                    <img src="~/Image/shop.jpg" class="rounded" style="border-radius: 5px 5px; height: 100px; width: 150px; position: absolute; ">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br />
+            <section class="panel">
+
+                <div class="panel-body ">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12  c">
+                                <span class="glyphicon glyphicon-stats"></span>  <strong>Weekly Lists Information</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class=" form-group ">
+                            <div class="row justify-content-center">
+                                <div class="col-md-4 text-center  a">
+                                    <span>
+                                        <label> <span class="glyphicon glyphicon-phone"></span> Phone Number</label><br />
+                                        <strong style="color: #099c10; font-size: 22px;"><label id="ph"></label></strong><br />
+
+                                    </span>
+                                </div>
+
+                                <div class="col-md-4 text-center  a">
+                                    <span>
+                                        <label>  Total Sale Price</label><br />
+                                        <strong style="color: #099c10; font-size: 22px; "><label id="price"></label></strong><br />
+
+                                    </span>
+                                </div>
+                                <div class="col-md-4 text-center  a">
+                                    <span>
+                                        <label>Limited Amount</label><br />
+                                        <strong style="color: #099c10; font-size: 22px; "><label id="con"></label></strong><br />
+
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12  d">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12  b">
+                                <span class="glyphicon glyphicon-th-list"></span> <strong>Search Information</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row  form-group">
+                        <div class="col-md-12 form-horizontal">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-xs-5"> Start From: &nbsp;</label>
+
+                                        <div class='input-group date col-xs-7' id='dtpFromDate'>
+                                            <input type='text' class="form-control input-sm" id="txtFromDate" name="txtFromDate" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-xs-5">End: &nbsp;</label>
+
+                                        <div class='input-group date col-xs-7' id='dtpToDate'>
+                                            <input type='text' class="form-control input-sm" id="txtToDate" name="txtToDate" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <button type="button" name="btnView" id="btnView" class="btn btn-info"> <span class="glyphicon glyphicon-search"></span> Search</button>&nbsp;
+                                        <button type="button" name="btnCancel" id="btnCancel" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-md-5">Mobile Name: </label>
+                                        <div class="col-md-7">
+                                            @Html.DropDownList("Name",
+                                               new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "--Please select-- ",
+                                               new { @class = "form-control select2" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-md-5">Employee Name: </label>
+                                        <div class="col-md-7">
+                                            @Html.DropDownList("Employeeid",
+                                               new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "--Please select-- ",
+                                               new { @class = "form-control select2" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-md-12" style="overflow-x:hidden;margin-top:-5px;">
+                        <table id="tblmobile" class="table table-bordered nowrap table-striped" cellspacing="0" style="width:100%;">
+                            <thead style="font-style:bold;font-size:14px;">
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Customer Name</th>
+                                    <th>Address</th>
+                                    <th>Phone No</th>
+                                    <th>Mobile Name</th>
+                                    <th>Mobile Model</th>
+                                    <th>Price</th>
+                                    <th>Date</th>
+                                    <th>Qty</th>
+                                    <th>Sale Person</th>
+
+                                </tr>
+                            </thead>
+
+                        </table>
+
+                    </div>
+                </div>
+                <div class="panel-footer bg-black-gradient">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>
+                                    <span class="glyphicon glyphicon-map-marker"></span> YanKin Township,Yangon Region
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-phone-alt"></span> 09-780563429
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-envelope"></span> Email-yazarmin@myanmareasenet.com
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Hello Mobile Shop</h4>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    "Do You need a good phone!Just come to Hello Mobile Shop."
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-left">
+                                        <img src="~/Image/hello.png" class="rounded" style="padding-left: 5px;height:60px;width:80px; padding-right: 0px; position: absolute; ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</section>
+
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('.select2').select2({ width: '100%' });
+
+            $('#dtpFromDate').datetimepicker({
+                format: 'YYYY-MM-DD',
+                useCurrent: true
+            });
+
+            $("#txtFromDate").val(moment(new Date()).format("YYYY-MM-DD"));
+
+            $('#dtpToDate').datetimepicker({
+                format: 'YYYY-MM-DD',
+                useCurrent: true
+            });
+
+            $("#txtToDate").val(moment(new Date()).format("YYYY-MM-DD"));
+            FillCount();
+
+            FillGrid();
+
+            GetTypeid();
+            GetEmpid();
+
+
+            $("#btnView").click(function () {
+               tbl= FillGrid();
+            });
+
+
+            $("#btnCancel").click(function () {
+                window.location.reload();
+            });
+        });
+
+
+        function FillGrid() {
+            var table = $('#tblmobile').DataTable(
+                {
+                    "destroy": true,
+                    "responsive": true,
+                    "pageLength": 3,
+                    "scrollX": true,
+                    "lengthMenu": [3,5,10, 15, 20, 25, 50, 75, 100],
+                    dom: "<'row'<'col-sm-6'B><'col-sm-6'f> >" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-4'l><'col-sm-4'i><'col-sm-4'p>>",
+                    buttons: [
+
+                        {
+                            extend: 'excelHtml5',
+                            footer: true,
+                            title: 'Sale Info',
+                            exportOptions: {
+                                columns: [1, 2, 3]
+                            },
+                            filename: function () {
+                                return "Sale Info";
+                            },
+                            customize: function (xlsx) {
+                                var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                                $('c[r=A1]', sheet).attr('s', '50');
+                                $('c[r=A1]', sheet).attr('s', '2');
+                                $('c[r=A2]', sheet).attr('s', '50');
+                                $('c[r=A2]', sheet).attr('s', '2');
+                            }
+                        },
+
+
+                    ],
+                    "ajax": {
+
+                        "url": "/api/MasterData/SearchInfo/?sdate=" + $('#txtFromDate').val() + '&edate=' + $('#txtToDate').val() + '&model=' + $('#Name').val() + '&empname=' + $('#Employeeid').val(),
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ''
+                    },
+                    "columns": [
+                        { "data": "saleid" },
+                        /*{ "data": "saleid" },*/
+                        { "data": "customerName" },
+                        { "data": "address" },
+                        { "data": "phNo" },
+                        { "data": "mobileName" },
+                        { "data": "model" },
+                        {
+                            "data": "price",
+                            'render': function (price) {
+                                return price + "MMK";
+                            }
+                        },
+                        {
+                            "data": "date"
+                        },
+                        { "data": "qty" },
+                        { "data": "employeeName" }
+
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": 0,
+                            "data": "saleid",
+                            "bSortable": false,
+                            "render": function (data, type, row) {
+
+                                str = '<a href="#" id="' + data + '" onclick=UpdateSaleInfo(this.id) class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-edit"></span> </a> <a href="#" id="' + data + '" onclick="DeleteSaleInfo(this.id);" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></a>';
+                                return str;
+
+                            }
+                        },
+                        {
+                            "targets": [7],
+                            "data": "",
+                            "render": function (data, type, row) {
+                                if (data != null) {
+
+                                    return (moment(data).format("YYYY-MM-DD"));
+                                }
+                                else {
+                                    return "";
+                                }
+
+                            }
+                        },
+                    ]
+                });
+            return table;
+        }
+
+        function UpdateSaleInfo(id) {
+            window.location.href = "/Master/UpdateSaleInfo/" + id;
+        }
+
+
+
+        function GetTypeid() {
+            $('#Name').empty();
+            $("#Name").append($('<option></option>').val("").html(' '));
+            $.getJSON('/api/MasterData/GetMobileType', 'GET').done(function (items) {
+                $.each(items, function (i, item) {
+                    $("#Name").append($('<option></option>').val(item.mobileid).html(item.mobileName));
+                });
+            });
+        }
+        function GetEmpid() {
+            $('#Employeeid').empty();
+            $("#Employeeid").append($('<option></option>').val("").html(' '));
+            $.getJSON('/api/MasterData/GetEmployeeName', 'GET').done(function (items) {
+                $.each(items, function (i, item) {
+                    $("#Employeeid").append($('<option></option>').val(item.employeeid).html(item.employeeName));
+                });
+            });
+        }
+
+        function FillCount() {
+            $.getJSON('/api/MasterData/GetBox', 'GET').done(function (result) {
+                $.each(result, function (i, result) {
+                    if ((result.qty) > 0) {
+                        $("#ph").text(result.qty);
+                    } else {
+                        $("#ph").text("0");
+                    }
+                    if ((result.price) > 0) {
+                        $("#price").text(result.price);
+                    }
+                    else {
+                        $("#price").text("0");
+                    }
+                    if ((result.qty) > 10) {
+                        $("#con").text("Yes");
+                    } else {
+                        $("#con").text("No");
+                    }
+
+                });
+            });
+        }
+    </script>
+
+
+}
+

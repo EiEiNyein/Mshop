@@ -1,0 +1,442 @@
+﻿@model Mshop.Models.MobileSaleInfo
+@{
+    ViewBag.Title = "UpdateSaleInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<style>
+    .a {
+        width: 300px;
+        height: 460px;
+        font-size: 14px;
+        background-color: #03125c;
+        color: whitesmoke;
+        margin-left: 20px;
+        /*margin-top: 20px;*/
+        padding: 30px;
+        /* margin-bottom: 15px;*/
+        border-radius: 5px 5px;
+        border: 1px solid whitesmoke;
+        box-sizing: border-box;
+    }
+</style>
+<section class="content" style="min-height:500px;overflow-x:hidden;">
+    <div class="row">
+        <div class="col-md-12 ">
+            <!--breadcrumbs start -->
+            <ul class="breadcrumb ">
+
+
+                <li class="active">Sale Information</li>
+            </ul>
+            <!--breadcrumbs end -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading" style="background-color:white; color: #343e6e; font-size: 16px; border: 3px solid #f1f2f7; border-top-color: #1b4a6e; border-radius: 5px 5px; ">
+                    <strong>Update Sale Information</strong>
+                </header>
+                <div class="panel-body" style="margin-top:15px;">
+
+                    <div class="row">
+                        <div class="col-md-8">
+
+                            @using (Ajax.BeginForm("UpdateSaleInfo", "Master",
+                             new AjaxOptions
+                             {
+                                 OnSuccess = "OnSuccess",
+                                 OnFailure = "OnFailure",
+                                 LoadingElementId = "progress",
+                                 UpdateTargetId = "ParentDiv"
+                             }))
+
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="container-fluid" style="border-radius: 3px 3px; color: #343e6e; font-size: 16px; color: darkslateblue; height: 38px; padding-left: 8px; padding-top: 7px; background-color: #c8cadb; ">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <strong>Update Sale Information</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-horizontal" style="margin-top:35px;">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Customer Name: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.HiddenFor(m => m.Saleid)
+                                                    @Html.HiddenFor(m => m.Typeid)
+                                                    @Html.HiddenFor(m => m.Customerid)
+                                                    @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.CustomerName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b> Address : </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.Address, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Phone No : </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.PhNo, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.PhNo, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Mobile Name: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @readonly = true })
+                                                    @*@Html.DropDownListFor(m => m.Name,
+        new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "--Please select-- ",
+        new { @class = "form-control select2" })*@
+                                                    @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b> Model: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.Model, new { @class = "form-control", @readonly = true })
+                                                    @*@Html.DropDownListFor(m => m.Typeid,
+        new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "--Please select-- ",
+        new { @class = "form-control select2" })*@
+                                                    @Html.ValidationMessageFor(x => x.Model, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Price: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @readonly = true })
+                                                    @*@Html.DropDownListFor(m => m.Price,
+                                new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "--Please select-- ",
+                                new { @class = "form-control select2" })*@
+                                                    @Html.ValidationMessageFor(x => x.Price, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Employee Name: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.Employeeid, new { @class = "form-control", @readonly = true })
+                                                    @*@Html.DropDownListFor(m => m.Employeeid,
+        new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "--Please select-- ",
+        new { @class = "form-control select2" })*@
+                                                    @Html.ValidationMessageFor(x => x.Employeeid, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Qty : </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.Qty, new { @class = "form-control", @type = "number", @readOnly = true })
+                                                    @Html.ValidationMessageFor(x => x.Qty, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Total: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @readOnly = true });
+                                                    @Html.ValidationMessageFor(x => x.TotalAmount, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                   
+                                        <div class="col-md-6">
+
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-offset-2 col-md-10">
+                                                        <div class="col-md-6">
+
+                                                            <button type="submit" id="btnSave" ondblclick="this.disabled = true;" class="btn btn-md btn-success"><span class="glyphicon glyphicon-ok"></span> Save</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <a href="/Master/SaleInfo" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>Cancel</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+
+
+                                </div>
+
+                            }
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="container">
+                                <div class=" form-group ">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12   a">
+                                            <h3>Hello Mobile Shop</h3>
+                                            <p style="font-size:16px;">"Do You need a good phone!Just come to Hello Mobile Shop"</p>
+                                            <b>
+                                                <ul>
+                                                    <li>Please fill the information of customer.</li>
+
+                                                    <li>And Check Again!</li>
+                                                </ul>
+                                            </b>
+                                           
+                                            <hr style=" border: 2px solid #edf0f5;">
+                                            
+                                            <img src="~/Image/cal.jpg" class="rounded" style="height: 190px;width:240px; border-radius: 5px 5px; padding-right: 0px; position: absolute; ">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer bg-black-gradient" style="margin-top:20px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>
+                                    <span class="glyphicon glyphicon-map-marker"></span> YanKin Township,Yangon Region
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-phone-alt"></span> 09-780563429
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-envelope"></span> Email-yazarmin@myanmareasenet.com
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Hello Mobile Shop</h4>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    "Do You need a good phone!Just come to Hello Mobile Shop."
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-left">
+                                        <img src="~/Image/hello.png" class="rounded" style="padding-left: 5px;height:60px;width:80px; padding-right: 0px; position: absolute; ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+</div>
+
+</section>
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+
+        function OnSuccess(response) {
+
+            if (response.status == true) {
+                swal(
+                    {
+                        title: "New Customer",
+                        text: response.content,
+                        type: "success"
+                    },function () {
+                        window.location.reload();
+                        window.location.href = "/Master/SaleInfo";
+                    });
+
+            }
+            else {
+                swal(
+                    {
+                        title: "New Customer",
+                        text: response.content,
+                        type: "error"
+                    });
+            }
+        }
+
+        function OnFailure(response) {
+            swal(
+                {
+                    title: "New Customer",
+                    text: response.content,
+                    type: "error"
+                });
+        }
+        $(document).ready(function () {
+
+
+            $('.select2').select2({ width: '100%' });// for combobox
+
+
+
+
+            GetModel();
+
+            GetPrice();
+            GetCustomer();
+            GetAddress();
+            GetTypeid();
+            GetEmpid();
+            GetPhone();
+            $("#Qty").change(function () {
+
+                var T = $(this).val();
+                var p = $('#Price').val();
+                var a = p * T;
+                $('#TotalAmount').val(a);
+
+            })
+        });
+
+
+        function GetTypeid() {
+            $('#Name').empty();
+
+            $.getJSON('/api/MasterData/GetMobile/' + @Model.Typeid, 'GET').done(function (items) {
+                $.each(items, function (i, item) {
+                    $("#Name")./*append($('<option></option>')*/val(item.mobileName);
+                });
+
+            });
+        }
+        function GetEmpid() {
+
+
+            $.getJSON('/api/MasterData/GetEmployeeName', 'GET').done(function (items) {
+                $.each(items, function (i, item) {
+                    $("#Employeeid").val(item.employeeName);
+                    @*$("#Employeeid").val('@Model.Employeeid');*@
+                });
+
+            });
+    }
+     function GetModel() {
+
+         $('#Model').empty();
+       /*  $("#Model").append($('<option></option>').html('---Please Select ---'));*/
+                $.getJSON('/api/MasterData/GetPrice/'+ @Model.Typeid, "GET").done(function (items) {
+                    $.each(items, function (i, item) {
+                        $("#Model").val(item.model);
+                    });
+                    @*$("#Typeid").val('@Model.Typeid');*@
+                });
+            }
+      function GetPrice() {
+                  $('#Price').empty();
+
+                $.getJSON("/api/MasterData/GetPrice/" + @Model.Typeid , "GET").done(function (items) {
+                    $.each(items, function (i, item) {
+                        $("#Price").val(item.price);
+                    });
+
+                });
+            }
+     function GetCustomer() {
+            $('#CustomerName').empty();
+         $.getJSON('/api/MasterData/GetCustomerInfo', 'GET').done(function (items) {
+                $.each(items, function (i, item) {
+                    $("#CustomerName").val(item.customerName);
+                });
+
+            });
+    }
+
+    function GetAddress() {
+        $('#Address').empty();
+        $.getJSON('/api/MasterData/GetCustomerInfo', 'GET').done(function (items) {
+            $.each(items, function (i, item) {
+                $("#Address").val(item.address);
+            });
+
+        });
+    }
+    function GetPhone() {
+        $('#PhNo').empty();
+        $.getJSON('/api/MasterData/GetCustomerInfo', 'GET').done(function (items) {
+            $.each(items, function (i, item) {
+                $("#PhNo").val(item.phNo);
+            });
+
+        });
+    }
+
+        (function ($) {
+            var defaultOptions = {
+                errorClass: 'has-error',
+                validClass: '',
+                highlight: function (element, errorClass, validClass) {
+                    $(element).closest(".form-group")
+                        .addClass(errorClass)
+                        .removeClass(validClass);
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).closest(".form-group")
+                        .removeClass(errorClass)
+                        .addClass(validClass);
+                }
+            };
+
+            $.validator.setDefaults(defaultOptions);
+
+            $.validator.unobtrusive.options = {
+                errorClass: defaultOptions.errorClass,
+                validClass: defaultOptions.validClass,
+            };
+        })(jQuery);
+
+</script>
+
+}
+

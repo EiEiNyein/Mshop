@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MobileShop" targetNamespace="http://tempuri.org/MobileShop.xsd" xmlns:mstns="http://tempuri.org/MobileShop.xsd" xmlns="http://tempuri.org/MobileShop.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MobileShop" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="MobileShop" msprop:Generator_UserDSName="MobileShop">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="SaleInfo" msprop:Generator_TableClassName="SaleInfoDataTable" msprop:Generator_TableVarName="tableSaleInfo" msprop:Generator_RowChangedName="SaleInfoRowChanged" msprop:Generator_TablePropName="SaleInfo" msprop:Generator_RowDeletingName="SaleInfoRowDeleting" msprop:Generator_RowChangingName="SaleInfoRowChanging" msprop:Generator_RowEvHandlerName="SaleInfoRowChangeEventHandler" msprop:Generator_RowDeletedName="SaleInfoRowDeleted" msprop:Generator_RowClassName="SaleInfoRow" msprop:Generator_UserTableName="SaleInfo" msprop:Generator_RowEvArgName="SaleInfoRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Saleid" msprop:Generator_ColumnVarNameInTable="columnSaleid" msprop:Generator_ColumnPropNameInRow="Saleid" msprop:Generator_ColumnPropNameInTable="SaleidColumn" msprop:Generator_UserColumnName="Saleid" type="xs:string" minOccurs="0" />
+              <xs:element name="MobileName" msprop:Generator_ColumnVarNameInTable="columnMobileName" msprop:Generator_ColumnPropNameInRow="MobileName" msprop:Generator_ColumnPropNameInTable="MobileNameColumn" msprop:Generator_UserColumnName="MobileName" type="xs:string" minOccurs="0" />
+              <xs:element name="Model" msprop:Generator_ColumnVarNameInTable="columnModel" msprop:Generator_ColumnPropNameInRow="Model" msprop:Generator_ColumnPropNameInTable="ModelColumn" msprop:Generator_UserColumnName="Model" type="xs:string" minOccurs="0" />
+              <xs:element name="Price" msprop:Generator_ColumnVarNameInTable="columnPrice" msprop:Generator_ColumnPropNameInRow="Price" msprop:Generator_ColumnPropNameInTable="PriceColumn" msprop:Generator_UserColumnName="Price" type="xs:int" minOccurs="0" />
+              <xs:element name="Qty" msprop:Generator_ColumnVarNameInTable="columnQty" msprop:Generator_ColumnPropNameInRow="Qty" msprop:Generator_ColumnPropNameInTable="QtyColumn" msprop:Generator_UserColumnName="Qty" type="xs:int" minOccurs="0" />
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:int" minOccurs="0" />
+              <xs:element name="Color" msprop:Generator_ColumnVarNameInTable="columnColor" msprop:Generator_ColumnPropNameInRow="Color" msprop:Generator_ColumnPropNameInTable="ColorColumn" msprop:Generator_UserColumnName="Color" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccInfo" msprop:Generator_TableClassName="AccInfoDataTable" msprop:Generator_TableVarName="tableAccInfo" msprop:Generator_RowChangedName="AccInfoRowChanged" msprop:Generator_TablePropName="AccInfo" msprop:Generator_RowDeletingName="AccInfoRowDeleting" msprop:Generator_RowChangingName="AccInfoRowChanging" msprop:Generator_RowEvHandlerName="AccInfoRowChangeEventHandler" msprop:Generator_RowDeletedName="AccInfoRowDeleted" msprop:Generator_RowClassName="AccInfoRow" msprop:Generator_UserTableName="AccInfo" msprop:Generator_RowEvArgName="AccInfoRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BrandName" msprop:Generator_ColumnVarNameInTable="columnBrandName" msprop:Generator_ColumnPropNameInRow="BrandName" msprop:Generator_ColumnPropNameInTable="BrandNameColumn" msprop:Generator_UserColumnName="BrandName" type="xs:string" minOccurs="0" />
+              <xs:element name="Type" msprop:Generator_ColumnVarNameInTable="columnType" msprop:Generator_ColumnPropNameInRow="Type" msprop:Generator_ColumnPropNameInTable="TypeColumn" msprop:Generator_UserColumnName="Type" type="xs:string" minOccurs="0" />
+              <xs:element name="Amodel" msprop:Generator_ColumnVarNameInTable="columnAmodel" msprop:Generator_ColumnPropNameInRow="Amodel" msprop:Generator_ColumnPropNameInTable="AmodelColumn" msprop:Generator_UserColumnName="Amodel" type="xs:string" minOccurs="0" />
+              <xs:element name="Acolor" msprop:Generator_ColumnVarNameInTable="columnAcolor" msprop:Generator_ColumnPropNameInRow="Acolor" msprop:Generator_ColumnPropNameInTable="AcolorColumn" msprop:Generator_UserColumnName="Acolor" type="xs:string" minOccurs="0" />
+              <xs:element name="Aprice" msprop:Generator_ColumnVarNameInTable="columnAprice" msprop:Generator_ColumnPropNameInRow="Aprice" msprop:Generator_ColumnPropNameInTable="ApriceColumn" msprop:Generator_UserColumnName="Aprice" type="xs:int" minOccurs="0" />
+              <xs:element name="Aqty" msprop:Generator_ColumnVarNameInTable="columnAqty" msprop:Generator_ColumnPropNameInRow="Aqty" msprop:Generator_ColumnPropNameInTable="AqtyColumn" msprop:Generator_UserColumnName="Aqty" type="xs:int" minOccurs="0" />
+              <xs:element name="Atotal" msprop:Generator_ColumnVarNameInTable="columnAtotal" msprop:Generator_ColumnPropNameInRow="Atotal" msprop:Generator_ColumnPropNameInTable="AtotalColumn" msprop:Generator_UserColumnName="Atotal" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

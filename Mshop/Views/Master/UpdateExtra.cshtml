@@ -1,0 +1,316 @@
+﻿@model Mshop.Models.ExtraInfo
+@{
+    ViewBag.Title = "UpdateExtra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .callout {
+        background-color: whitesmoke;
+    }
+    .a {
+        width: 340px;
+        height: 340px;
+        font-size: 14px;
+        background-color: #03125c;
+        color: whitesmoke;
+        margin-left: 20px;
+        /*margin-top: 20px;*/
+        padding: 30px;
+        /* margin-bottom: 15px;*/
+        border-radius: 5px 5px;
+        border: 1px solid whitesmoke;
+        box-sizing: border-box;
+    }
+</style>
+<section class="content" style="min-height:500px;overflow-x:hidden;">
+    <div class="row">
+        <div class="col-md-12 ">
+            <!--breadcrumbs start -->
+            <ul class="breadcrumb ">
+
+
+                <li class="active">Update Accessories Detail</li>
+            </ul>
+            <!--breadcrumbs end -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading" style="background-color: white; color: #343e6e;font-size:16px; border: 3px solid #f1f2f7; border-top-color: #1b4a6e; border-radius: 5px 5px;">
+                    <strong>Update Accessories Detail</strong>
+                </header>
+                <div class="panel-body" style="margin-top:10px;">
+
+               
+                    <div class="row">
+                        <div class="col-md-7">
+
+                            @using (Ajax.BeginForm("UpdateExtra", "Master",
+                             new AjaxOptions
+                             {
+                                 OnSuccess = "OnSuccess",
+                                 OnFailure = "OnFailure",
+                                 LoadingElementId = "progress",
+                                 UpdateTargetId = "ParentDiv"
+                             }))
+
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="container-fluid" style="border-radius: 3px 3px; color: #343e6e; font-size: 16px; color: darkslateblue; height: 38px; padding-left: 8px; padding-top: 7px; background-color: #c8cadb; ">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <strong> Update  Accessories Information</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-horizontal">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 " style=" font-size: 16px;"><b>Brand Name: </b></label>
+                                                <div class="col-md-7">
+                                                    @Html.HiddenFor(m => m.Aid, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.BrandName, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.BrandName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 " style=" font-size: 16px;"><b>Type: </b></label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.Type, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.Model, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 " style=" font-size: 16px;"><b> Model: </b></label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.Model, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.Model, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 " style=" font-size: 16px;"><b>Price : </b></label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.Price, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 " style=" font-size: 16px;"><b>Color : </b></label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.Color, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.Color, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 " style=" font-size: 16px;"><b>Warranty : </b></label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.Warranty, new { @class = "form-control", @type = "number" })
+                                                    @Html.ValidationMessageFor(x => x.Warranty, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5" style=" font-size: 16px;"><b>Stock : </b></label>
+                                                <div class="col-md-7">
+                                                    @Html.TextBoxFor(m => m.Stock, new { @class = "form-control", @type = "number" })
+                                                    @Html.ValidationMessageFor(x => x.Stock, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-4">
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-offset-2 col-md-10">
+                                                        <div class="col-md-6">
+
+                                                            <button type="submit" id="btnSave" ondblclick="this.disabled = true;" class="btn btn-md btn-success"><span class="glyphicon glyphicon-ok"></span> Save</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <a href="/Master/SaleExtra" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>Cancel</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-5">
+                            <div class="container">
+                                <div class=" form-group ">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12   a">
+                                            <h3>Hello Mobile Shop</h3>
+
+
+                                            <b>
+                                                <ul>
+                                                    <li>Please fill the new accessories.</li>
+
+                                                    <li>And Check Again!</li>
+                                                </ul>
+                                            </b>
+
+                                            <hr style=" border: 2px solid #edf0f5;">
+
+
+                                            <img src="~/Image/ass.png" class="rounded" style="height: 130px;width:270px; border-radius: 5px 5px; padding-right: 0px; position: absolute; ">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-footer bg-black-gradient">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>
+                                    <span class="glyphicon glyphicon-map-marker"></span> YanKin Township,Yangon Region
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-phone-alt"></span> 09-780563429
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-envelope"></span> Email-yazarmin@myanmareasenet.com
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Hello Mobile Shop</h4>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    "Do You need a good phone!Just come to Hello Mobile Shop."
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-left">
+                                        <img src="~/Image/hello.png" class="rounded" style="padding-left: 5px;height:60px;width:80px; padding-right: 0px; position: absolute; ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</section>
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        function OnSuccess(response) {
+
+            if (response.status == true) {
+                swal(
+                    {
+                        title: "Update Accessories Detail",
+                        text: response.content,
+                        type: "success"
+                    },function () {
+                        window.location.reload();
+                        window.location.href = "/Master/NewSaleExtra";
+                    });
+
+            }
+            else {
+                swal(
+                    {
+                        title: "Update Accessories Detail",
+                        text: response.content,
+                        type: "error"
+                    });
+            }
+        }
+
+        function OnFailure(response) {
+            swal(
+                {
+                    title: "Update Accessories Detail",
+                    text: response.content,
+                    type: "error"
+                });
+        }
+
+
+
+        (function ($) {
+            var defaultOptions = {
+                errorClass: 'has-error',
+                validClass: '',
+                highlight: function (element, errorClass, validClass) {
+                    $(element).closest(".form-group")
+                        .addClass(errorClass)
+                        .removeClass(validClass);
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).closest(".form-group")
+                        .removeClass(errorClass)
+                        .addClass(validClass);
+                }
+            };
+
+            $.validator.setDefaults(defaultOptions);
+
+            $.validator.unobtrusive.options = {
+                errorClass: defaultOptions.errorClass,
+                validClass: defaultOptions.validClass,
+            };
+        })(jQuery);
+
+    </script>
+
+}

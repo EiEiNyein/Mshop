@@ -1,0 +1,951 @@
+﻿@model Mshop.Models.MobileSaleInfo
+
+@{
+    ViewBag.Title = "NewSaleInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+   
+    .a {
+        width: 300px;
+        height: 410px;
+        font-size: 14px;
+        background-color: #03125c;
+        color: whitesmoke;
+        margin-left: 20px;
+        /*margin-top: 20px;*/
+        padding: 30px;
+        /* margin-bottom: 15px;*/
+        border-radius: 5px 5px;
+        border: 1px solid whitesmoke;
+        box-sizing: border-box;
+    }
+
+    .r {
+        width: 300px;
+        height: 80px;
+        font-size: 14px;
+       
+        background-color: #c3d4f7;
+        color: #030430;
+        margin-left: 20px;
+        /*margin-top: 20px;*/
+        padding-top: 10px;
+        /* margin-bottom: 15px;*/
+        border-radius: 5px 5px;
+        border: 1px solid #dcdde8;
+        box-sizing: border-box;
+    }
+</style>
+<section class="content" style="min-height:500px;overflow-x:hidden;">
+    <div class="row">
+        <div class="col-md-12 ">
+            <!--breadcrumbs start -->
+            <ul class="breadcrumb ">
+
+                <li><a href="/Master/Home"><i class="fa fa-home"></i> Home</a></li>
+                <li class="active"> New Sale Information</li>
+            </ul>
+            <!--breadcrumbs end -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading" style="background-color:white; color: #343e6e; font-size: 16px; border: 3px solid #f1f2f7; border-top-color: #1b4a6e; border-radius: 5px 5px; ">
+                    <strong>New Sale Information</strong>
+                </header>
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-8">
+
+                            @using (Ajax.BeginForm("NewSaleInfo", "Master",
+                             new AjaxOptions
+                             {
+                                 OnSuccess = "OnSuccess",
+                                 OnFailure = "OnFailure",
+                                 LoadingElementId = "progress",
+                                 UpdateTargetId = "ParentDiv"
+                             }))
+
+                            {
+                                @Html.AntiForgeryToken()
+                                @*<h4 style="height: 32px; font-size: 20px; color:darkslateblue;"><b>Fill Sale Information</b></h4>
+                        <hr style=" border: 1px solid black;">*@
+                                <div class="form-horizontal" style="margin-top:5px;">
+                                    <div class="row" style="margin-top: -10px; background-color: #d9d8f0; padding-left: 8px; padding-top: 7px; color: darkslateblue; height: 38px; font-size: 16px; border-radius: 5px 5px; ">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                                <div class="col-md-8">
+                                                    <label><strong>Phone</strong></label>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    @Html.CheckBoxFor(m => m.Check1, new { @class = "checkbox" })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                                <div class="col-md-8">
+                                                    <label><strong>Accessories</strong></label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    @Html.CheckBoxFor(m => m.Check2, new { @class = "checkbox" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Name: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.CustomerName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group hidden" id="divname">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Mobile Name: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.DropDownListFor(m => m.Name,
+                                                       new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "--Please select-- ",
+                                                       new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b> Address : </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.Address, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group hidden" id="divmodel">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b> Mobile Model: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.DropDownListFor(m => m.Typeid,
+                                                       new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "--Please select-- ",
+                                                       new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(x => x.Typeid, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b> Ph No: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.PhNo, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.PhNo, "", new { @class = "text-danger" })
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group hidden" id="divcol">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Color: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.Colour, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.Colour, "", new { @class = "text-danger" })
+                                                   
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group hidden" id="divwar" >
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Warranty : </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.Warranty, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(x => x.Warranty, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group hidden"  id="divprice">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Price: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(x => x.Price, "", new { @class = "text-danger" })
+                                                 
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group hidden" id="qty">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Qty : </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.Qty, new { @class = "form-control", @type = "number" })
+                                                    @Html.ValidationMessageFor(x => x.Qty, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group hidden" id="total">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Total: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(x => x.TotalAmount, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 " style=" font-size: 16px;"><b>Sale Person: </b></label>
+                                                <div class="col-md-8">
+                                                    @Html.DropDownListFor(m => m.Employeeid,
+                                                       new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "--Please select-- ",
+                                                       new { @class = "form-control select2" })
+                                                    @Html.ValidationMessageFor(x => x.Employeeid, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group hidden" id="add">
+                                                <div class="col-md-6"><label style=" font-size: 16px;"><b>Accessories:</b></label></div>
+                                                <div class="col-md-6">
+                                                    <div class="pull-left">
+                                                        <a href="#" class="btn btn-info" id="btnacc"><span class="glyphicon glyphicon-plus"></span>Add</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12" style="margin-left:13px;">
+                                            <div class="form-group hidden" id="table">
+                                                <hr style=" border: 2px solid whitesmoke;">
+                                                <label style="background-color:darkorange;font-size:16px;color:white;border-radius:3px 3px;"><strong><span class="glyphicon glyphicon-th-list"></span> Accessory List</strong></label>
+                                                <br />
+                                                <br />
+                                                <div class="table-responsive">
+                                                    <table id="tblparticipant" class="table table-bordered  table-striped nowrap" style="width:100%;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Action</th>
+                                                                <th>Brand Name</th>
+                                                                <th>Type</th>
+                                                                <th>Model</th>
+                                                                <th>Color</th>
+                                                                <th>Price</th>
+                                                                <th>Warranty</th>
+                                                                <th>Qty</th>
+                                                                <th>Total Amount</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-4">
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-offset-2 col-md-10">
+                                                        <div class="col-md-6">
+
+                                                            <button type="submit" id="btnSave" ondblclick="this.disabled = true;" class="btn btn-md btn-success"><span class="glyphicon glyphicon-ok"></span> Save</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <a href="/Master/SaleInfo" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>Cancel</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-3" style="margin-top:10px;">
+
+                            <div class="container">
+                                <div class=" form-group hidden " id="phonecolor">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12 r">
+                                            <label class="col-md-8 " style=" width: 300px;"><b> To choose phone color:</b></label>
+                                            <div class="col-md-8" style="padding-left: 50px; height: 300px; width: 250px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 18px; color: #f2984e; ">
+                                                @*@Html.LabelFor(m => m.Color, new { @class = "form-control" })*@
+                                                <label id="Col"></label>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class=" form-group ">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12   a">
+                                            <h3>Hello Mobile Shop</h3>
+
+                                            <b>
+
+                                                <label style="width:300px;">Please fill the information of customer.</label>
+
+                                                <label>And Check Again!</label>
+
+                                            </b>
+
+                                            <hr style=" border: 2px solid #edf0f5;">
+
+
+                                            <img src="~/Image/cal.jpg" class="rounded" style="height: 190px;width:240px; border-radius: 5px 5px; padding-right: 0px; position: absolute; ">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="panel-footer bg-black-gradient" style="margin-top:20px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>
+                                    <span class="glyphicon glyphicon-map-marker"></span> YanKin Township,Yangon Region
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-phone-alt"></span> 09-780563429
+                                </li>
+                                <br />
+                                <li>
+                                    <span class="glyphicon glyphicon-envelope"></span> Email-yazarmin@myanmareasenet.com
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Hello Mobile Shop</h4>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    "Do You need a good phone!Just come to Hello Mobile Shop."
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-left">
+                                        <img src="~/Image/hello.png" class="rounded" style="padding-left: 5px;height:70px;width:90px; padding-right: 0px; position: absolute; ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        </div>
+               
+
+            </section>
+        
+<div class="modal fade" id="modalAddparti" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: white; color: #343e6e; font-size: 16px; border: 3px solid #f1f2f7; border-top-color: darkorange; border-radius: 5px 5px; ">
+                <!-- /modal Header-->
+                <button type="button" class="close" style="color: #343e6e;"  data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Accessory Sale Information</h4>
+            </div>
+            <!-- modal body-->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="form-group" id="divbname">
+                            <label class="col-md-4 " style=" font-size: 16px;"><b>Brand Name : </b></label>
+                            <div class="col-md-8">
+                                @Html.DropDownList("BrandName",
+                                   new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "--Please select-- ",
+                                   new { @class = "form-control select2" })
+                                @Html.ValidationMessage("BrandName", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" id="divtype">
+                            <label class="col-md-4 " style=" font-size: 16px;"><b>Type: </b></label>
+                            <div class="col-md-8">
+                                @Html.DropDownList("Type",
+                                   new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "--Please select-- ",
+                                   new { @class = "form-control select2" })
+                                @Html.ValidationMessage("Type", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" id="divamodel">
+                            <label class="col-md-4 " style=" font-size: 16px;"><b> Model: </b></label>
+                            <div class="col-md-8">
+                                @Html.DropDownList("Model",
+                                   new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "--Please select-- ",
+                                   new { @class = "form-control select2" })
+                                @Html.ValidationMessage("Model", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" id="divaprice">
+                            <label class="col-md-4 " style=" font-size: 16px;"><b>Color: </b></label>
+                            <div class="col-md-8">
+
+                                @Html.DropDownList("Color",
+                        new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "--Please select-- ",
+                        new { @class = "form-control select2" })
+                                @Html.ValidationMessage("Color", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" id="divamodel">
+                            <label class="col-md-4 " style=" font-size: 16px;"><b> Price: </b></label>
+                            <div class="col-md-8">
+                                @Html.TextBox("Aprice", "", new { @class = "form-control", @type = "number", @readonly = "readonly" })
+
+                                @Html.ValidationMessage("Aprice", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" id="divaprice">
+                            <label class="col-md-4 " style=" font-size: 16px;"><b>Warranty: </b></label>
+                            <div class="col-md-8">
+                                @Html.TextBox("warranty", "", new { @class = "form-control", @type = "number" })
+
+                                @Html.ValidationMessage("warranty", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" id="divamodel">
+                            <label class="col-md-4 " style=" font-size: 16px;"><b> Qty: </b></label>
+                            <div class="col-md-8">
+                                @Html.TextBox("Aqty", "", new { @class = "form-control", @type = "number" })
+
+                                @Html.ValidationMessage("Aqty", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" id="divaprice">
+                            <label class="col-md-4 " style=" font-size: 16px;"><b>Total Amount: </b></label>
+                            <div class="col-md-8">
+                                @Html.TextBox("Amount", "", new { @class = "form-control", @type = "number", @readonly = "readonly"})
+
+                                @Html.ValidationMessage("Amount", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-md btn-success" id="btnModalAcc" tabindex="30"><i class="fa fa-check"></i>Add</button>
+                            <button type="button" class="btn btn-md btn-danger" data-dismiss="modal" tabindex="31" id="btnPartiClose"> <i class="fa fa-times-circle"></i>Close</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /modal footer -->
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        function OnSuccess(response) {
+
+            if (response.status == true) {
+                swal(
+                    {
+                        title: "New Customer",
+                        text: response.content,
+                        type: "success"
+                    }, function () {
+
+                        window.location.href = "/SaleRdlc/SaleView/" + response.id;
+                    });
+
+            }
+            else {
+                swal(
+                    {
+                        title: "New Customer",
+                        text: response.content,
+                        type: "error"
+                    });
+            }
+        }
+
+        function OnFailure(response) {
+            swal(
+                {
+                    title: "New Customer",
+                    text: response.content,
+                    type: "error"
+                });
+        }
+        $(document).ready(function () {
+
+
+            $('.select2').select2({ width: '100%' });// for combobox
+
+          
+
+            $("#btnacc").click(function () {
+
+                $("#modalAddparti").modal('show');
+
+
+            });
+            $("#btnModalAcc").click(function () {
+                AddModalAcc();
+            })
+
+            $("#Check1").change(function () {
+                if ($('#Check1').is(":checked")) {
+                    $("#divname").removeClass('hidden');
+                    $("#divmodel").removeClass('hidden');
+                    $("#divcol").removeClass('hidden');
+                    $("#divwar").removeClass('hidden');
+                    $("#divprice").removeClass('hidden');
+                    $("#qty").removeClass('hidden');
+                    $("#total").removeClass('hidden');
+                    $("#phonecolor").removeClass('hidden');
+                    /*$('#btnSave').prop('disabled', false);*/
+                }
+                else {
+                    $("#divname").addClass('hidden');
+                    $("#divmodel").addClass('hidden');
+                    $("#divprice").addClass('hidden');
+                    $("#divcol").addClass('hidden');
+                    $("#divwar").addClass('hidden');
+                    $("#qty").addClass('hidden');
+                    $("#total").addClass('hidden');
+                    $("#phonecolor").addClass('hidden');
+                   /* $('#btnSave').prop('disabled', true);*/
+                }
+            });
+            $("#Check2").change(function () {
+                if ($('#Check2').is(":checked")) {
+                    $("#add").removeClass('hidden');
+                    $("#table").removeClass('hidden');
+                    /*$('#btnSave').prop('disabled', false);*/
+                }
+                else {
+                    $("#add").addClass('hidden');
+                    $("#table").addClass('hidden');
+                    //$('#btnSave').prop('disabled', true);
+
+                }
+            });
+          
+
+            $("#Name").change(function () {
+                var MobileId = $(this).val();
+
+                $('#Typeid').empty();
+                $("#Typeid").append($('<option></option>').html('---Please Select ---'));
+                $.getJSON("/api/MasterData/GetModel/" + MobileId, "GET").done(function (items) {
+                    $.each(items, function (i, item) {
+                        $("#Typeid").append($('<option></option>').val(item.typeid).html(item.model));
+                    });
+                });
+            })
+
+            $("#Typeid").change(function () {
+
+                var TypeId = $(this).val();
+                $('#Col').empty();
+                
+                $.getJSON("/api/MasterData/GetPrice/" + TypeId, "GET").done(function (items) {
+                    $.each(items, function (i, item) {
+                        $("#Col").html(item.color);
+                    });
+                });
+            })
+            $("#Typeid").change(function () {
+
+                var TypeId = $(this).val();
+                $('#Price').empty();
+                
+                $.getJSON("/api/MasterData/GetPrice/" + TypeId, "GET").done(function (items) {
+                    $.each(items, function (i, item) {
+                        $("#Price").val(item.price);
+                    });
+                });
+            })
+
+            $("#Typeid").change(function () {
+
+                var TypeId = $(this).val();
+                $('#Warranty').empty();
+
+                $.getJSON("/api/MasterData/GetPrice/" + TypeId, "GET").done(function (items) {
+                    $.each(items, function (i, item) {
+                        $("#Warranty").val(item.warranty);
+                    });
+                });
+            })
+            
+
+            $("#Qty").change(function () {
+
+                var T = $(this).val();
+                var p = $('#Price').val();
+                var a = p * T;
+                $('#TotalAmount').val(a);
+
+            })
+            GetTypeid();
+            GetEmpid();
+            //Accessories
+          
+            $("#BrandName").change(function () {
+                var Id = $(this).val();
+              
+                $('#Type').empty();
+                $("#Type").append($('<option></option>').html('---Please Select ---'));
+                $.getJSON("/api/MasterData/GetExtraType/" + Id, "GET").done(function (items) {
+                    $.each(items, function (i, item) {
+                        $("#Type").append($('<option></option>').val(item.type).html(item.type));
+                    });
+                });
+               
+            })
+            $("#Type").change(function () {
+                var Id = $(this).val();
+               
+                $('#Model').empty();
+                $("#Model").append($('<option></option>').html('---Please Select ---'));
+                $.getJSON("/api/MasterData/GetExtraModel/" + Id, "GET").done(function (items) {
+                    $.each(items, function (i, item) {
+                        $("#Model").append($('<option></option>').val(item.model).html(item.model));
+                    });
+                });
+            })
+
+            $("#Model").change(function () {
+                var Id = $(this).val();
+
+                $('#Color').empty();
+                $("#Color").append($('<option></option>').html('---Please Select ---'));
+                $.getJSON("/api/MasterData/GetExtraColor/" + Id, "GET").done(function (items) {
+                    $.each(items, function (i, item) {
+                        $("#Color").append($('<option></option>').val(item.aid).html(item.color));
+                    });
+                });
+            })
+
+
+            $("#Color").change(function () {
+                    var Id = $(this).val();
+                      $('#Aprice').empty();
+                $.getJSON("/api/MasterData/GetExtraPrice/" + Id, "GET").done(function (items) {
+                        $.each(items, function (i, item) {
+                            $("#Aprice").val(item.price);
+                        });
+                    });
+
+            })
+
+                 $("#Color").change(function () {
+                var Id = $(this).val();
+                
+                $('#warranty').empty();
+                     $.getJSON("/api/MasterData/GetExtraPrice/" + Id, "GET").done(function (items) {
+                    $.each(items, function (i, item) {
+                        $("#warranty").val(item.warranty);
+                    });
+                });
+
+                 })
+
+
+            GetBrandName();
+
+            $("#Aqty").change(function () {
+
+                var T = $(this).val();
+                var p = $('#Aprice').val();
+                var a = p * T;
+                $('#Amount').val(a);
+
+            })
+
+        });
+           
+
+        function GetTypeid() {
+            $('#Name').empty();
+            $("#Name").append($('<option></option>').html('---Please Select ---'));
+            $.getJSON('/api/MasterData/GetMobileType', 'GET').done(function (items) {
+                $.each(items, function (i, item) {
+                    $("#Name").append($('<option></option>').val(item.mobileid).html(item.mobileName));
+                });
+            });
+        }
+        function GetEmpid() {
+            $('#Employeeid').empty();
+            $("#Employeeid").append($('<option></option>').html('---Please Select ---'));
+            $.getJSON('/api/MasterData/GetEmployeeName', 'GET').done(function (items) {
+                $.each(items, function (i, item) {
+                    $("#Employeeid").append($('<option></option>').val(item.employeeid).html(item.employeeName));
+                });
+            });
+        }
+
+        //Accessories
+
+        function GetBrandName() {
+            $('#BrandName').empty();
+            $("#BrandName").append($('<option></option>').html('---Please Select ---'));
+            $.getJSON('/api/MasterData/GetBrandName', 'GET').done(function (items) {
+                $.each(items, function (i, item) {
+                    $("#BrandName").append($('<option></option>').val(item.brandName).html(item.brandName));
+                });
+            });
+        }
+
+        function AddModalAcc() {
+
+            if ($('#BrandName').val() != "" && $('#Type').val() != "" && $('#Model').val() != "" && $('#Color').val() != "" && $('#Aprice').val() != "" && $('#warranty').val() != "") {
+
+
+                $.ajax({
+                    url: "/Master/SaveModalAcc",
+                    type: "POST",
+                    datatype: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: {
+                        BrandName: $("#BrandName").val(),
+                        Type: $("#Type").val(),
+
+                        Model: $("#Model").val(),
+                        Color: $("#Color").val(),
+
+                        Aprice: $("#Aprice").val(),
+                        warranty: $("#warranty").val(),
+                        Aqty: $("#Aqty").val(),
+                        Amount: $("#Amount").val(),
+                    },
+                    success: function (result) {
+                        if (result.status == true) {
+                            $('#modalAddparti').modal('hide');
+
+                            FillModalInfo();
+
+
+                            ClearPopupData();
+                        }
+                        else {
+
+                            swal("Warning !", result.content, "warning");
+                            FillModalInfo();
+                        }
+                    }
+
+                })
+
+
+            }
+
+        }
+        
+
+        function FillModalInfo() {
+            $('#tblparticipant').DataTable().destroy();
+            $("#tblparticipant").DataTable(
+                {
+                    "destory": true,
+                    responsive: true,
+                    paging: false,
+                    searching: false,
+                    "scrollX": true,
+                    "retrieve": true,
+
+                    "buttons": [
+                    ],
+                    "ajax": {
+                        "url": "/Master/GetModalAcc",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ''
+                    },
+                    "columns": [
+                        { "data": "ACid" },
+                        { "data": "BrandName" },
+                        /*{ "data": "Brand" },*/
+                       /* { "data": "TypeName" },*/
+                        { "data": "Type" },
+                        { "data": "Model" },
+                        { "data": "Brand" },
+                        { "data": "Aprice" },
+                        { "data": "warranty" },
+                        { "data": "Aqty" },
+                        { "data": "Amount" }
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": 0,
+                            "sWidth": "15%",
+                            "data": "Acid",
+                            "render": function (data, type, row) {
+                                var ID = row.ACid;
+
+
+                                return '<a href="#"  class="btn btn-xs btn-danger" onclick="RemoveModalInfo(' + ID + ')"><i class="fa fa-times-circle"> Remove</i></a>';
+
+                            }
+
+                        }
+                    ]
+
+                });
+
+
+        }
+
+        function RemoveModalInfo(id) {
+
+            $.getJSON('/Master/RemoveModalInfo/' + id).done(function (result) {
+                if (result == "success") {
+                    FillModalInfo();
+                    swal("Data", "Successfully Deleted", "success");
+                }
+                else {
+                    swal("Data", "Cannot delete !", "error");
+                    FillModalInfo();
+                }
+            });
+        }
+         
+        function ClearPopupData() {
+
+            $('#BrandName').val('').trigger('change');
+            $("#Type").val('').trigger('change');
+            $("#Model").val('').trigger('change');
+            $("#Color").val('').trigger('change');
+          
+            $('#Aprice').val('');
+            $("#warranty").val('');
+            $("#Aqty").val('');
+            $("#Amount").val('');
+           
+        }
+
+    
+
+        (function ($) {
+            var defaultOptions = {
+                errorClass: 'has-error',
+                validClass: '',
+                highlight: function (element, errorClass, validClass) {
+                    $(element).closest(".form-group")
+                        .addClass(errorClass)
+                        .removeClass(validClass);
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).closest(".form-group")
+                        .removeClass(errorClass)
+                        .addClass(validClass);
+                }
+            };
+
+            $.validator.setDefaults(defaultOptions);
+
+            $.validator.unobtrusive.options = {
+                errorClass: defaultOptions.errorClass,
+                validClass: defaultOptions.validClass,
+            };
+        })(jQuery);
+
+    </script>
+
+}

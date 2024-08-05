@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Mobile_ShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccSale">
+          <Key>
+            <PropertyRef Name="Bid" />
+          </Key>
+          <Property Name="Bid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Saleid" Type="nvarchar" MaxLength="10" />
+          <Property Name="Employeeid" Type="nvarchar" MaxLength="10" />
+          <Property Name="Customerid" Type="nvarchar" MaxLength="10" />
+          <Property Name="Aid" Type="nvarchar" MaxLength="10" />
+          <Property Name="Qty" Type="float" />
+          <Property Name="TotalAmount" Type="float" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Customerid" />
+          </Key>
+          <Property Name="Customerid" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhNo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Employeeid" />
+          </Key>
+          <Property Name="Employeeid" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Position" Type="nvarchar" MaxLength="100" />
+          <Property Name="Salary" Type="float" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhNo" Type="varchar" MaxLength="50" />
+          <Property Name="ProfileImage" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Extra">
+          <Key>
+            <PropertyRef Name="Aid" />
+          </Key>
+          <Property Name="Aid" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" />
+          <Property Name="Color" Type="nvarchar" MaxLength="30" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Stock" Type="float" />
+          <Property Name="Warranty" Type="float" />
+        </EntityType>
+        <EntityType Name="MobileModel">
+          <Key>
+            <PropertyRef Name="Typeid" />
+          </Key>
+          <Property Name="Typeid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mobileid" Type="nvarchar" MaxLength="10" />
+          <Property Name="Model" Type="varchar" MaxLength="120" />
+          <Property Name="Color" Type="nvarchar" MaxLength="100" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Stock" Type="int" />
+          <Property Name="Warranty" Type="int" />
+        </EntityType>
+        <EntityType Name="MobileType">
+          <Key>
+            <PropertyRef Name="Mobileid" />
+          </Key>
+          <Property Name="Mobileid" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MobileName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PhoneOrder">
+          <Key>
+            <PropertyRef Name="Orderid" />
+          </Key>
+          <Property Name="Orderid" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Customername" Type="nvarchar" MaxLength="50" />
+          <Property Name="Oaddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="Oph" Type="varchar" MaxLength="15" />
+          <Property Name="PhoneType" Type="nvarchar" MaxLength="30" />
+          <Property Name="PhoneModel" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="NowDate" Type="datetime" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="Delivery" Type="nvarchar" MaxLength="10" />
+          <Property Name="Employeeid" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Repair">
+          <Key>
+            <PropertyRef Name="Rno" />
+          </Key>
+          <Property Name="Rno" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Customerid" Type="nvarchar" MaxLength="10" />
+          <Property Name="PhoneType" Type="nvarchar" MaxLength="30" />
+          <Property Name="Model" Type="nvarchar" MaxLength="30" />
+          <Property Name="Color" Type="nvarchar" MaxLength="30" />
+          <Property Name="Description" Type="nvarchar" MaxLength="3000" />
+          <Property Name="IsNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="RepairPayment" Type="float" />
+          <Property Name="Projection" Type="float" />
+          <Property Name="TotalAmount" Type="float" />
+        </EntityType>
+        <EntityType Name="SaleInfo">
+          <Key>
+            <PropertyRef Name="Saleid" />
+          </Key>
+          <Property Name="Saleid" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Typeid" Type="int" />
+          <Property Name="Customerid" Type="nvarchar" MaxLength="10" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Color" Type="nvarchar" MaxLength="80" />
+          <Property Name="Qty" Type="float" />
+          <Property Name="Employeeid" Type="nvarchar" MaxLength="10" />
+          <Property Name="TotalAmount" Type="float" />
+        </EntityType>
+        <EntityContainer Name="Mobile_ShopModelStoreContainer">
+          <EntitySet Name="AccSale" EntityType="Self.AccSale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Extra" EntityType="Self.Extra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MobileModel" EntityType="Self.MobileModel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MobileType" EntityType="Self.MobileType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhoneOrder" EntityType="Self.PhoneOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Repair" EntityType="Self.Repair" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SaleInfo" EntityType="Self.SaleInfo" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Mobile_ShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccSale">
+          <Key>
+            <PropertyRef Name="Bid" />
+          </Key>
+          <Property Name="Bid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Saleid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Employeeid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Customerid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Aid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Double" />
+          <Property Name="TotalAmount" Type="Double" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Customerid" />
+          </Key>
+          <Property Name="Customerid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Employeeid" />
+          </Key>
+          <Property Name="Employeeid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Double" />
+          <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProfileImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Extra">
+          <Key>
+            <PropertyRef Name="Aid" />
+          </Key>
+          <Property Name="Aid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Stock" Type="Double" />
+          <Property Name="Warranty" Type="Double" />
+        </EntityType>
+        <EntityType Name="MobileType">
+          <Key>
+            <PropertyRef Name="Mobileid" />
+          </Key>
+          <Property Name="Mobileid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MobileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Repair">
+          <Key>
+            <PropertyRef Name="Rno" />
+          </Key>
+          <Property Name="Rno" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Customerid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="IsNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="RepairPayment" Type="Double" />
+          <Property Name="Projection" Type="Double" />
+          <Property Name="TotalAmount" Type="Double" />
+        </EntityType>
+        <EntityContainer Name="Mobile_ShopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccSales" EntityType="Self.AccSale" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Extras" EntityType="Self.Extra" />
+          <EntitySet Name="MobileTypes" EntityType="Self.MobileType" />
+          <EntitySet Name="Repairs" EntityType="Self.Repair" />
+          <EntitySet Name="MobileModels" EntityType="Mobile_ShopModel.MobileModel" />
+          <EntitySet Name="SaleInfoes" EntityType="Mobile_ShopModel.SaleInfo" />
+          <EntitySet Name="PhoneOrders" EntityType="Mobile_ShopModel.PhoneOrder" />
+        </EntityContainer>
+        <EntityType Name="MobileModel">
+          <Key>
+            <PropertyRef Name="Typeid" />
+          </Key>
+          <Property Name="Typeid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mobileid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="Color" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Stock" Type="Int32" />
+          <Property Name="Warranty" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SaleInfo">
+          <Key>
+            <PropertyRef Name="Saleid" />
+          </Key>
+          <Property Name="Saleid" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Typeid" Type="Int32" />
+          <Property Name="Customerid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Color" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Double" />
+          <Property Name="Employeeid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmount" Type="Double" />
+        </EntityType>
+        <EntityType Name="PhoneOrder">
+          <Key>
+            <PropertyRef Name="Orderid" />
+          </Key>
+          <Property Name="Orderid" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Customername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Oaddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Oph" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NowDate" Type="DateTime" Precision="3" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="Delivery" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Employeeid" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Mobile_ShopModelStoreContainer" CdmEntityContainer="Mobile_ShopEntities">
+          <EntitySetMapping Name="AccSales">
+            <EntityTypeMapping TypeName="Mobile_ShopModel.AccSale">
+              <MappingFragment StoreEntitySet="AccSale">
+                <ScalarProperty Name="Bid" ColumnName="Bid" />
+                <ScalarProperty Name="Saleid" ColumnName="Saleid" />
+                <ScalarProperty Name="Employeeid" ColumnName="Employeeid" />
+                <ScalarProperty Name="Customerid" ColumnName="Customerid" />
+                <ScalarProperty Name="Aid" ColumnName="Aid" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="Mobile_ShopModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Customerid" ColumnName="Customerid" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhNo" ColumnName="PhNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Mobile_ShopModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Employeeid" ColumnName="Employeeid" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhNo" ColumnName="PhNo" />
+                <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Extras">
+            <EntityTypeMapping TypeName="Mobile_ShopModel.Extra">
+              <MappingFragment StoreEntitySet="Extra">
+                <ScalarProperty Name="Aid" ColumnName="Aid" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Warranty" ColumnName="Warranty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MobileTypes">
+            <EntityTypeMapping TypeName="Mobile_ShopModel.MobileType">
+              <MappingFragment StoreEntitySet="MobileType">
+                <ScalarProperty Name="Mobileid" ColumnName="Mobileid" />
+                <ScalarProperty Name="MobileName" ColumnName="MobileName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Repairs">
+            <EntityTypeMapping TypeName="Mobile_ShopModel.Repair">
+              <MappingFragment StoreEntitySet="Repair">
+                <ScalarProperty Name="Rno" ColumnName="Rno" />
+                <ScalarProperty Name="Customerid" ColumnName="Customerid" />
+                <ScalarProperty Name="PhoneType" ColumnName="PhoneType" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsNo" ColumnName="IsNo" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="RepairPayment" ColumnName="RepairPayment" />
+                <ScalarProperty Name="Projection" ColumnName="Projection" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MobileModels">
+            <EntityTypeMapping TypeName="Mobile_ShopModel.MobileModel">
+              <MappingFragment StoreEntitySet="MobileModel">
+                <ScalarProperty Name="Warranty" ColumnName="Warranty" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Mobileid" ColumnName="Mobileid" />
+                <ScalarProperty Name="Typeid" ColumnName="Typeid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaleInfoes">
+            <EntityTypeMapping TypeName="Mobile_ShopModel.SaleInfo">
+              <MappingFragment StoreEntitySet="SaleInfo">
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Employeeid" ColumnName="Employeeid" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Customerid" ColumnName="Customerid" />
+                <ScalarProperty Name="Typeid" ColumnName="Typeid" />
+                <ScalarProperty Name="Saleid" ColumnName="Saleid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhoneOrders">
+            <EntityTypeMapping TypeName="Mobile_ShopModel.PhoneOrder">
+              <MappingFragment StoreEntitySet="PhoneOrder">
+                <ScalarProperty Name="Employeeid" ColumnName="Employeeid" />
+                <ScalarProperty Name="Delivery" ColumnName="Delivery" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="NowDate" ColumnName="NowDate" />
+                <ScalarProperty Name="PhoneColor" ColumnName="PhoneColor" />
+                <ScalarProperty Name="PhoneModel" ColumnName="PhoneModel" />
+                <ScalarProperty Name="PhoneType" ColumnName="PhoneType" />
+                <ScalarProperty Name="Oph" ColumnName="Oph" />
+                <ScalarProperty Name="Oaddress" ColumnName="Oaddress" />
+                <ScalarProperty Name="Customername" ColumnName="Customername" />
+                <ScalarProperty Name="Orderid" ColumnName="Orderid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

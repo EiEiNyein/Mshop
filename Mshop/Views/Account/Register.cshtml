@@ -1,0 +1,229 @@
+﻿@model Mshop.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Styles.Render("~/bundles/menlayoutcss")
+
+<style>
+    .loginform {
+        background: #fff;
+        box-shadow: 0px 1px 10px 0px rgb(0 0 0 / 49%);
+        padding: 35px;
+        margin-top: 5%;
+        border-radius: 5px;
+        height: 460px;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+
+    hr {
+        margin: 5px 0;
+    }
+
+    section {
+        padding-top: 10px;
+        padding-bottom: 0;
+    }
+
+
+    .btn {
+        border-radius: 5px;
+        margin: 0;
+    }
+
+    .btn-default {
+        background-color: lightgray;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    .form-horizontal .control-label {
+        font-weight: bold;
+    }
+
+    input.form-control, textarea, select {
+        border-radius: 5px;
+        border-bottom-left-radius: 5px !important;
+        border-top-left-radius: 5px !important;
+        border-top-right-radius: 5px !important;
+        border-bottom-right-radius: 5px !important;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+</style>
+<body style="background-color: #d7d6d682">
+    <div class="container">
+
+        <div class="col-md-6 col-md-offset-3 loginform">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <center>
+                        <div class="container-fluid" style="border-radius: 5px 5px; height: 110px;  padding-top: 15px; background-color: #2b3b8a;">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="col-md-2">
+                                        <div class="text-left">
+                                            <img src="~/Image/hello.png" class="rounded" style="border-radius: 5px 5px; height: 85px; width: 95px; position: absolute; ">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-7 text-center">
+                                        <h3 style="color:goldenrod;padding-left:5px;">Hello Mobile Shop</h3>
+
+                                        <p style="color: whitesmoke; font-size: 12px; padding-left: 7px;">"Do You need a good phone!Just come to <strong style="color:goldenrod;">Hello Mobile Shop</strong>."</p>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="text-left">
+                                            <img src="~/Image/shop.jpg" class="rounded" style="border-radius: 5px 5px;  height: 85px; width: 95px; position: absolute; ">
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        @*<img src="~/Image/title.png" height="100" width="500" class="pull-center" />*@
+                    </center>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <center>
+
+                        <div class="hidden-lg hidden-md">
+                            <header style="color: #069b43; font-weight: 700; font-size: 13pt; font-family: 'Open Sans'">Hello Mobile Shop</header>
+                        </div>
+                    </center>
+                </div>
+            </div>
+
+            <section id="loginForm" class="col-md-12">
+                <hr />
+                @using (Ajax.BeginForm("Register", "Account",
+                   new AjaxOptions
+                   {
+                       OnSuccess = "OnSuccess",
+                       OnFailure = "OnFailure",
+                       LoadingElementId = "progress",
+                       UpdateTargetId = "ParentDiv"
+                   }, new { @class = "form-vertical", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+            <h4 style="text-align:center;color: #2e2573"><strong> Creat New Account</strong> </h4>
+                    <br />
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @*<div class="form-group">
+                @Html.LabelFor(m => m.RoleName, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.RoleName, new SelectList(Enumerable.Empty<SelectListItem>(), "id", "name"), "--- Select ---", new { @class = "form-control select2" })
+                </div>
+            </div>*@
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Email <strong class="text-danger">*</strong> : </label>
+                        <div class="col-md-7">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @required = "required", autocomplete = "off", @maxlength = "50", placeholder = "Email", @tabindex = "1" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Password <strong class="text-danger">*</strong> : </label>
+                        <div class="col-md-7">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @required = "required", autocomplete = "off", @maxlength = "25", placeholder = "Password", @tabindex = "2" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">ConfirmPassword <strong class="text-danger">*</strong> : </label>
+                        <div class="col-md-7">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @required = "required", autocomplete = "off", @maxlength = "25", placeholder = "Password", @tabindex = "2" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group"style="padding-right:15px;">
+                        <center>
+                            <button type="submit" class="btn btn-primary" tabindex="4"><i class="fa fa-sign-in"></i> Register</button>
+                            <button type="button" class="btn btn-default" tabindex="5"><i class="fa fa-close"></i> Cancel</button>
+                        </center>
+                    </div>
+                }
+            </section>
+
+
+        </div>
+    </div>
+</body>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*<script type="text/javascript">
+
+            //$(document).ready(function () {
+            //    GetRole();
+
+            //    $('.select2').select2({ width: '100%' });// for combobox
+
+
+            //});
+        //function GetRole() {
+        //    $("#RoleName").empty();
+        //    $("#RoleName").append($('<option></option>').val("").html("--- Select ---"));
+        //    $.getJSON('/api/ManageData/GetRole', 'GET').done(function (items) {
+        //        $.each(items, function (i, item) {
+        //            $("#RoleName").append($('<option></option>').val(item.Name).html(item.Name));
+        //        });
+        //    });
+        //}
+        function OnSuccess(response) {
+            if (response.status == true) {
+                swal(
+                    {
+                        title: "New User",
+                        text: response.content,
+                        type: "success"
+                    },
+                    function () {
+                        window.location.href = "/Master/Home";
+                    });
+            }
+            else {
+                swal(
+                    {
+                        title: "New User",
+                        text: response.content,
+                        type: "error"
+                    });
+            }
+        }
+        function OnFailure(response) {
+            swal(
+                {
+                    title: "New User",
+                    text: response.content,
+                    type: "error"
+                });
+        }
+        </script>*@
+}
